@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\pageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/auth');
+});
+
+// AUTH ROUTER CONTROLLER
+Route::controller(AuthController::class)->group(function() {
+    Route::get('/auth','index')->middleware('isGuest');
+    Route::post('/auth/login','loginGan')->middleware('isGuest');
+    Route::get('/auth/register','register')->middleware('isGuest');
+    Route::post('/auth/registme','createUser')->middleware('isGuest');
+    Route::get('/auth/logout','logout');
+});
+
+// PAGE CONTROLLER
+Route::controller(pageController::class)->group(function() {
+    Route::get('/dashboard', 'dashboard')->middleware('isUser');
 });
