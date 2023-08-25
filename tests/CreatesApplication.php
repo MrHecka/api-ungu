@@ -3,7 +3,7 @@
 namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
-use Illuminatea\Foundation\Application;
+use Illuminate\Foundation\Application;
 
 trait CreatesApplication
 {
