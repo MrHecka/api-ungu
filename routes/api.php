@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\ApiMhsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('carimahasiswa',[ApiMhsController::class, 'index'])->name('carimahasiswa.index');
+Route::get('carimahasiswa/{mhs}',[ApiMhsController::class, 'show'])->name('carimahasiswa.show');

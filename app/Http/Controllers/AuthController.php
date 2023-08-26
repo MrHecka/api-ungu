@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-    function index() {
+    public function index() {
         return view("auth/login");
     }
 
-    function loginGan(Request $request) {;
+    public function loginGan(Request $request) {;
         Session::flash('email',$request->email);
 
         $request->validate([
@@ -41,11 +41,11 @@ class AuthController extends Controller
         }
     }
 
-    function register() {
+    public function register() {
         return view('/auth/register');
     }
 
-    function createUser(Request $request) {
+    public function createUser(Request $request) {
         Session::flash('nama',$request->nama);
         Session::flash('email',$request->email);
         Session::flash('nohp',$request->nohp);
@@ -61,6 +61,7 @@ class AuthController extends Controller
             'email.email'=>'Email tidak valid woyyyy😡',
             'email.unique'=>'Email udah pernah terdaftar woyyy jan menuhin DB😡',
             'nohp.required'=>'No. HP nya diisi dulu oyy😡',
+            'nohp.unique'=>'No. HP udah pernah terdaftar woyyy jan menuhin DB😡',
             'password.required'=>'Password nya diisi dulu oyy😡',
             'password.min'=>'Minimum password 6 karakter ngabb😡',
         ]);
@@ -89,7 +90,7 @@ class AuthController extends Controller
         }
     }
 
-    function logout() {
+    public function logout() {
         Auth::logout();
         return redirect('/auth')->with('success','Berhasil Logout✔');
     }

@@ -1,4 +1,5 @@
 @extends('layout.error')
+
 @extends('layout.app')
 
 @section('isikonten')
@@ -13,7 +14,7 @@
         <span class="text-gray-300">Input Semua Data Dulu Woyyy!😡</span>
       </div>
 
-      <form action="/auth/registme" method="POST">
+      <form action="{{ route('postregister') }}" method="POST">
         @csrf
 
         <div class="mb-4 text-lg">
@@ -49,7 +50,7 @@
         </div>
 
         <div class="mb-4 text-lg align-bottom pt-5 pl-2 items-center justify-center">
-          <span>Udah Punya Akun? Ya <a href="/auth" class="text-blue-500 hover:underline font-bold hover:font-semibold">Login</a> Jirr😡</span>
+          <span>Udah Punya Akun? Ya <a href="{{ route('login') }}" class="text-blue-500 hover:underline font-bold hover:font-semibold">Login</a> Jirr😡</span>
         </div>
       </form>
     </div>
@@ -57,4 +58,5 @@
 </div>
 
 @endsection
+
 

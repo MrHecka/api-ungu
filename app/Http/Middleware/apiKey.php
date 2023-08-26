@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class isGuest
+class apiKey
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,10 @@ class isGuest
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check()) {
-            return redirect('/dashboard')->withErrors('Kamu Sudah Login, Silahkan Logout Terlebih Dahulu😡');
+        $apikeyheaders = $request->header('apikey');
+        $userApiKey = User::where('apikey', $apikeyheaders)->first();
+        if(strlen($userApiKey) === 0) {
+            return response()->json(['pesan'=>"api key tidak ditemukan | masukkan apikey di headers dengan format : {'apikey' : 'apikeyanda'}", 'status' => 401], 401);
         }
         return $next($request);
     }

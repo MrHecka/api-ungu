@@ -21,14 +21,16 @@ Route::get('/', function () {
 
 // AUTH ROUTER CONTROLLER
 Route::controller(AuthController::class)->group(function() {
-    Route::get('/auth','index')->middleware('isGuest');
-    Route::post('/auth/login','loginGan')->middleware('isGuest');
-    Route::get('/auth/register','register')->middleware('isGuest');
-    Route::post('/auth/registme','createUser')->middleware('isGuest');
-    Route::get('/auth/logout','logout');
+    Route::get('/auth','index')->middleware('isGuest')->name('login');
+    Route::post('/auth/login','loginGan')->middleware('isGuest')->name('postlogin');
+    Route::get('/auth/register','register')->middleware('isGuest')->name('register');
+    Route::post('/auth/registme','createUser')->middleware('isGuest')->name('postregister');
+    Route::get('/auth/logout','logout')->name('logout');
 });
 
 // PAGE CONTROLLER
 Route::controller(pageController::class)->group(function() {
-    Route::get('/dashboard', 'dashboard')->middleware('isUser');
+    Route::get('/dashboard', 'dashboard')->middleware('isUser')->name('dashboard');
+    Route::get('/docs', 'docs')->middleware('isUser')->name('docs');
+    Route::get('/profil', 'profil')->middleware('isUser')->name('profil');
 });

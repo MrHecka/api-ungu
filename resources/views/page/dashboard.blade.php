@@ -1,3 +1,7 @@
+@extends('layout.success')
+
+@extends('layout.error')
+
 @extends('layout.app')
 
 @section('isikonten')
@@ -11,7 +15,7 @@
 </div>
 
 <script>
-    var words = ["Halo, Selamat Datang "+`{{ Auth::user()->nama }}`+" :)"];
+    var words = ["Halo, Selamat Datang "+`{{ $userName }}`+" :)"];
     let i = 0;
     let j = 0;
     let currentWord = "";
