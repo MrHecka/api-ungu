@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API GABUT NYENYE</title>
+    <meta name="keywords" content="API, APIUNGU, FREEAPI, APIKEYS, APIDEV, APIINDONESIA, INDONESIA, APPLICATION PROGRAMMING INTERFACE, PREMIUM API, FREE API, API KEYS, API INDONESIA, API ID">
+    <meta name="description" value="API-UNGU | API UNTUK DEVELOPER">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link rel="icon" type="image/x-icon" href="{{url('img/faviconHead.ico')}}">
+    <title>API|UNGU</title>
     @vite('resources/css/app.css')
   </head>
 
@@ -16,9 +20,9 @@
         <nav id="nav" class="fixed inset-x-0 top-0 flex flex-row justify-between z-10 text-white bg-transparent">
             <div class="p-4">
               @if (Auth::check())
-                <div class="animate-in slide-in-from-top transform transition-all hover:scale-125 font-extrabold tracking-widest text-xl"><a href="/dashboard" class="transition duration-500 hover:text-indigo-500">API NYENYE</a></div>
+                <div class="animate-in slide-in-from-top transform transition-all hover:scale-125 font-extrabold tracking-widest text-xl"><a href="/dashboard" class="transition duration-500 hover:text-indigo-500">API-UNGU</a></div>
               @else
-                <div class="animate-in slide-in-from-top transform transition-all hover:scale-125 font-extrabold tracking-widest text-xl"><a href="/" class="transition duration-500 hover:text-indigo-500">API NYENYE</a></div>
+                <div class="animate-in slide-in-from-top transform transition-all hover:scale-125 font-extrabold tracking-widest text-xl"><a href="/" class="transition duration-500 hover:text-indigo-500">API-UNGU</a></div>
               @endif
             </div>
       
@@ -83,5 +87,7 @@
     $(window).on('load', function() {
         $('#spin-preloader').fadeOut();
     });
+    $( '.g-recaptcha' ).attr( 'data-theme', 'dark' );
+ 
     </script>
 </html>

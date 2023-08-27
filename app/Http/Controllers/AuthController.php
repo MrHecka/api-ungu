@@ -22,10 +22,12 @@ class AuthController extends Controller
 
         $request->validate([
             'email'=>'required',
-            'password'=> 'required'
+            'password'=> 'required',
+            'g-recaptcha-response' => 'required|captcha'
         ],[
             'email.required'=>'Email nya diisi dulu oyy😡',
             'password.required'=>'Password nya diisi dulu oyy😡',
+            'g-recaptcha-response.required'=>'Isi captcha dulu woyy dasar bot😡'
         ]);
 
         $dataLogin = [
@@ -55,6 +57,7 @@ class AuthController extends Controller
             'email'=>'required|email|unique:users',
             'nohp'=> 'required|unique:users|max:13',
             'password'=> 'required|min:6',
+            'g-recaptcha-response' => 'required|captcha'
         ],[
             'nama.required'=>'Nama nya diisi dulu oyy😡',
             'email.required'=>'Email nya diisi dulu oyy😡',
@@ -64,6 +67,7 @@ class AuthController extends Controller
             'nohp.unique'=>'No. HP udah pernah terdaftar woyyy jan menuhin DB😡',
             'password.required'=>'Password nya diisi dulu oyy😡',
             'password.min'=>'Minimum password 6 karakter ngabb😡',
+            'g-recaptcha-response.required'=>'Isi captcha dulu woyy dasar bot😡'
         ]);
 
         $dataRegister = [

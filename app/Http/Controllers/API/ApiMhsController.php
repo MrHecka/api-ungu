@@ -17,7 +17,10 @@ class ApiMhsController extends Controller
     {
         $apikeyheaders = $request->header('apikey');
         $userApiKey = User::where('apikey', $apikeyheaders)->first();
-        return response()->json(['pesan'=>'mahasiswa tidak ditemukan | contoh request : /api/carimahasiswa/budi','status'=>200,'nama_apikey'=>$userApiKey->nama], 200);
+        return response()->json([
+            'pesan'=>'mahasiswa tidak ditemukan | contoh request : /api/carimahasiswa/budi','status'=>200,
+            'nama_apikey'=>$userApiKey->nama]
+            , 200);
     }
 
     /**
@@ -38,10 +41,30 @@ class ApiMhsController extends Controller
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
             $httpreq = new Client();
             $reqapi = $httpreq->request('GET', 'https://api-frontend.kemdikbud.go.id/hit_mhs/'.$mhs);
-            $result = json_decode($reqapi->getBody());
-            return response()->json(['pesan'=>'sukses','status'=>200,'nama_apikey'=>$userApiKey->nama,'source'=>'https://pddikti.kemdikbud.go.id','data'=>$result]);
+            $arrayMHS = [];
+            $dataMHS = json_decode($reqapi->getBody(), true);
+            foreach($dataMHS['mahasiswa'] as $mhsdata) {
+                array_push($arrayMHS, (object)[
+                    'detailMHS' => $mhsdata['text'],
+                    'linkMHS' => 'https://pddikti.kemdikbud.go.id'.$mhsdata['website-link'],
+                ]);
+            }
+
+            $result = $reqapi->getBody();
+            return response()->json([
+                'pesan'=>'sukses',
+                'status'=>200,
+                'nama_apikey'=>$userApiKey->nama,
+                'source'=>'https://pddikti.kemdikbud.go.id',
+                'data'=>$arrayMHS
+            ], 200);
         } catch(ClientException $err) {
-            return response()->json(['pesan'=>'gagal','status'=>404,'nama_apikey'=>$userApiKey->nama,'error'=>'Server down | '.$err->getResponse()->getBody().' | '.$err->getResponse()->getStatusCode()]);
+            return response()->json([
+                'pesan'=>'gagal',
+                'status'=>400,
+                'nama_apikey'=>$userApiKey->nama,
+                'error'=>'Something went wrong | '.$err->getResponse()->getBody().' | '.$err->getResponse()->getStatusCode()
+            ], 400);
         }
     }
 

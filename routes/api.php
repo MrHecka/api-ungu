@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ApiMhsController;
+use App\Http\Controllers\API\CekResiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// API MAHASISWA
 Route::get('carimahasiswa',[ApiMhsController::class, 'index'])->name('carimahasiswa.index');
 Route::get('carimahasiswa/{mhs}',[ApiMhsController::class, 'show'])->name('carimahasiswa.show');
+
+// API CEKRESI
+Route::get('cekresi/', [CekResiController::class, 'index'])->name('cekresi.index');
+Route::get('cekresi/{service}', [CekResiController::class, 'show'])->name('cekresi.show');
