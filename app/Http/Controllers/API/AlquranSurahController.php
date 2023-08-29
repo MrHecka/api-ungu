@@ -41,9 +41,9 @@ class AlquranSurahController extends Controller
         $userApiKey = User::where('apikey', $apikeyheaders)->first();
         if(!$findSurah) {
             return response()->json(['pesan'=>'gagal',
-            'status'=>200,
+            'status'=>404,
             'nama_apikey'=>$userApiKey->nama,
-            'data'=>'Data tidak ditemukan :('], 400);
+            'data'=>'Data tidak ditemukan :('], 404);
         } else {
             return response()->json(['pesan'=>'sukses',
             'status'=>200,

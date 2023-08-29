@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\pageController;
@@ -34,3 +35,9 @@ Route::controller(pageController::class)->group(function() {
     Route::get('/docs', 'docs')->middleware('isUser')->name('docs');
     Route::get('/profil', 'profil')->middleware('isUser')->name('profil');
 });
+
+// ADMIN CONTROLLER
+Route::middleware(['isUser', 'isDewa'])->group(function() {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+});
+

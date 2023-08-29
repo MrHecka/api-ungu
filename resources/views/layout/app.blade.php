@@ -72,13 +72,26 @@
 
 </body>
 
-<div class="flex flex-col">
-    <footer class="bg-gradient-to-r from-fuchsia-900 to-violet-950 text-white py-4">
-        <div class="container mx-auto text-center">
-            <p>&copy; <script>document.write(new Date().getFullYear())</script> H3x4. All rights reserved❤</p>
-        </div>
-    </footer>
-</div>
+
+<footer class="flex flex-col items-center bg-neutral-900 text-center text-white font-bold">
+  <div class="container px-6 pt-4 font-bold">
+    <div class="mb-6 flex justify-center font-bold">
+      <a href="https://macroma.site/">
+        <img src="{{ url('/img/macroma_logo.webp') }}" class="inline w-16 h-16 mt-4" />
+      </a>
+      <a href="https://macroma.site/" class="inline pt-8 pr-4 font-bold animate-in slide-in-from-top p-2 font-semibold text-white hover:text-indigo-500">Macroma Media</a>
+      <div class="inline-block h-[100px] min-h-[1em] w-0.5 self-stretch bg-neutral-100 opacity-100 dark:opacity-50"></div>
+      
+      <a href="{{ route('login') }}">
+        <img src="{{ url('/img/faviconHead.ico') }}" class="inline w-16 h-16 mt-4 ml-2" />
+      </a>
+      <a href="{{ route('login') }}" class="inline pt-8 font-bold animate-in slide-in-from-top p-2 font-semibold text-white hover:text-indigo-500">API Ungu</a>
+    </div>
+  </div>
+
+  <div class="w-full p-4 text-center" style="background-color: rgba(0, 0, 0, 0.2)">© <script>document.write(new Date().getFullYear())</script> Copyright: <a class="text-whitehite font-bold" href="https://tailwind-elements.com/">Macroma Media</a>
+  </div>
+</footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>

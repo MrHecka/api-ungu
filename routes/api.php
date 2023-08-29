@@ -5,7 +5,9 @@ use App\Http\Controllers\API\AlquranSurahController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ApiMhsController;
+use App\Http\Controllers\API\bmkgController;
 use App\Http\Controllers\API\CekResiController;
+use App\Http\Controllers\API\freeEGController;
 use App\Http\Controllers\API\TiktokDownloaderController;
 
 /*
@@ -40,3 +42,10 @@ Route::get('alquran/ayat/{id}', [AlquranAyatController::class, 'show'])->name('a
 // API TIKTOK DOWNLOADER
 Route::get('tiktok', [TiktokDownloaderController::class, 'index'])->name('tiktokdownloader.index');
 Route::get('tiktok/{id}', [TiktokDownloaderController::class, 'show'])->name('tiktokdownloader.show');
+
+// BMKG API
+Route::get('bmkg/gempaterbaru', [bmkgController::class, 'index'])->name('bmkggempa.index');
+
+// FREE GAMES API
+Route::get('freegames/epicgames', [freeEGController::class, 'index'])->name('freeepicgames.index');
+
