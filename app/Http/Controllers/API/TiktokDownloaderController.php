@@ -17,7 +17,8 @@ class TiktokDownloaderController extends Controller
     {
         $apikeyheaders = $request->header('apikey');
         $userApiKey = User::where('apikey', $apikeyheaders)->first();
-        return response()->json(['pesan'=>'gagal | id video tidak ditemukan | contoh request : /api/tiktok/7264413619281795842',
+        return response()->json([
+        'pesan'=>'gagal | id video tidak ditemukan | contoh request : /api/tiktok/7264413619281795842',
         'status'=>200,
         'nama_apikey'=>$userApiKey->nama], 200);
     }
@@ -66,9 +67,9 @@ class TiktokDownloaderController extends Controller
         } catch(ClientException $err) {
             return response()->json([             
                 'pesan'=>'sukses',
-                'status'=>400,
+                'status'=>404,
                 'nama_apikey'=>$userApiKey->nama,
-                'error'=>'Something went wrong | '.$err->getResponse()->getBody().' | '.$err->getResponse()->getStatusCode()], 400);
+                'error'=>'Something went wrong | '.$err->getResponse()->getBody().' | '.$err->getResponse()->getStatusCode()], 404);
         }
     }
 

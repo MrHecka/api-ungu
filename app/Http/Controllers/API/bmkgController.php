@@ -4,11 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Http\Request;
 
-class CekResiController extends Controller
+class bmkgController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,12 +19,15 @@ class CekResiController extends Controller
             $apikeyheaders = $request->header('apikey');
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
             $httpreq = new Client();
-            $reqapi = $httpreq->request('GET', 'https://api.binderbyte.com/v1/list_courier?api_key='.env('APIRESI'));
+            $reqapi = $httpreq->request('GET', 'https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json');
+            $result = json_decode($reqapi->getBody(), true);
             return response()->json([
-                'pesan'=>'resi/layanan tidak ditemukan | contoh request : /api/cekresi/jne?&resi=142080117721233',
+                'pesan'=>'sukses',
                 'status'=>200,
                 'nama_apikey'=>$userApiKey->nama,
-                'listkurir'=>json_decode($reqapi->getBody())], 200);
+                'source'=>'https://data.bmkg.go.id/',
+                'data'=>$result,
+                'linkgambar'=>'https://data.bmkg.go.id/DataMKG/TEWS/'.$result['Infogempa']['gempa']['Shakemap']], 200);
         } catch(ClientException $err) {
             return response()->json([
                 'pesan'=>'gagal',
@@ -46,28 +49,11 @@ class CekResiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $service, Request $request)
+    public function show(string $id)
     {
-        try {
-            $apikeyheaders = $request->header('apikey');
-            $userApiKey = User::where('apikey', $apikeyheaders)->first();
-            $httpreq = new Client();
-            $reqapi = $httpreq->request('GET', 'https://api.binderbyte.com/v1/track?api_key='.env('APIRESI').'&courier='.$service.'&awb='.$request->resi);
-            return response()->json([
-                'pesan'=>'sukses',
-                'status'=>200,
-                'nama_apikey'=>$userApiKey->nama,
-                'data'=>json_decode($reqapi->getBody())->data,
-            ], 200);
-        } catch(ClientException $err) {
-                return response()->json([
-                    'pesan'=>'gagal',
-                    'status'=>404,
-                    'nama_apikey'=>$userApiKey->nama,
-                    'error'=>'Something went wrong | '.$err->getResponse()->getBody().' | '.$err->getResponse()->getStatusCode()
-                ], 404);
-        }
+        //
     }
+
     /**
      * Update the specified resource in storage.
      */

@@ -45,9 +45,9 @@ class AlquranAyatController extends Controller
             'data'=>$allAyat[$id-1]], 200);
         } else {
             return response()->json(['pesan'=>'gagal',
-            'status'=>400,
+            'status'=>404,
             'nama_apikey'=>$userApiKey->nama,
-            'data'=>'Data tidak ditemukan :('], 400);
+            'data'=>'Data tidak ditemukan :('], 404);
         }
     }
 

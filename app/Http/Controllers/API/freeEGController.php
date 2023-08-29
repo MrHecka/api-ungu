@@ -4,11 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Http\Request;
 
-class CekResiController extends Controller
+class freeEGController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,12 +19,29 @@ class CekResiController extends Controller
             $apikeyheaders = $request->header('apikey');
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
             $httpreq = new Client();
-            $reqapi = $httpreq->request('GET', 'https://api.binderbyte.com/v1/list_courier?api_key='.env('APIRESI'));
+            $reqapi = $httpreq->request('GET', 'https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=en-US&country=ID&allowCountries=ID');
+            $result = json_decode($reqapi->getBody(), true)['data']['Catalog']['searchStore']['elements'];
+            $arrayEG = [];
+
+            // GET ALL DATA
+            foreach($result as $dataEg) {
+                array_push($arrayEG, (object)[
+                    'judul' => $dataEg['title'],
+                    'deskripsi' => $dataEg['description'],
+                    'status' => $dataEg['status'],
+                    'gambar' => $dataEg['keyImages'][0]['url'],
+                    'link' => 'https://store.epicgames.com/en-US/p/'.$dataEg['urlSlug']
+                ]);
+            }
+
+            // RETURN RESPONSE AS JSON
             return response()->json([
-                'pesan'=>'resi/layanan tidak ditemukan | contoh request : /api/cekresi/jne?&resi=142080117721233',
+                'pesan'=>'sukses',
                 'status'=>200,
                 'nama_apikey'=>$userApiKey->nama,
-                'listkurir'=>json_decode($reqapi->getBody())], 200);
+                'source'=>'https://store.epicgames.com/en-US/free-games/',
+                'data'=>$arrayEG
+                ], 200);
         } catch(ClientException $err) {
             return response()->json([
                 'pesan'=>'gagal',
@@ -46,28 +63,11 @@ class CekResiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $service, Request $request)
+    public function show(string $id)
     {
-        try {
-            $apikeyheaders = $request->header('apikey');
-            $userApiKey = User::where('apikey', $apikeyheaders)->first();
-            $httpreq = new Client();
-            $reqapi = $httpreq->request('GET', 'https://api.binderbyte.com/v1/track?api_key='.env('APIRESI').'&courier='.$service.'&awb='.$request->resi);
-            return response()->json([
-                'pesan'=>'sukses',
-                'status'=>200,
-                'nama_apikey'=>$userApiKey->nama,
-                'data'=>json_decode($reqapi->getBody())->data,
-            ], 200);
-        } catch(ClientException $err) {
-                return response()->json([
-                    'pesan'=>'gagal',
-                    'status'=>404,
-                    'nama_apikey'=>$userApiKey->nama,
-                    'error'=>'Something went wrong | '.$err->getResponse()->getBody().' | '.$err->getResponse()->getStatusCode()
-                ], 404);
-        }
+        //
     }
+
     /**
      * Update the specified resource in storage.
      */

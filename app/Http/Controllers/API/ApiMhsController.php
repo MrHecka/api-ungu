@@ -61,10 +61,10 @@ class ApiMhsController extends Controller
         } catch(ClientException $err) {
             return response()->json([
                 'pesan'=>'gagal',
-                'status'=>400,
+                'status'=>404,
                 'nama_apikey'=>$userApiKey->nama,
                 'error'=>'Something went wrong | '.$err->getResponse()->getBody().' | '.$err->getResponse()->getStatusCode()
-            ], 400);
+            ], 404);
         }
     }
 
