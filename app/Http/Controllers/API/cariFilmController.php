@@ -4,11 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Http\Request;
 
-class ApiMhsController extends Controller
+class cariFilmController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class ApiMhsController extends Controller
         $apikeyheaders = $request->header('apikey');
         $userApiKey = User::where('apikey', $apikeyheaders)->first();
         return response()->json([
-            'pesan'=>'mahasiswa tidak ditemukan | contoh request : [GET] /api/carimahasiswa/budi','status'=>200,
-            'nama_apikey'=>$userApiKey->nama]
-            , 200);
+        'pesan'=>'Film Tidak Ditemukan | contoh request : [GET] /api/film/cari/?q=John+Wick','status'=>200,
+        'nama_apikey'=>$userApiKey->nama]
+        , 200);
     }
 
     /**
@@ -34,30 +34,20 @@ class ApiMhsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $mhs, Request $request)
+    public function show(Request $request)
     {
         try {
             $apikeyheaders = $request->header('apikey');
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
             $httpreq = new Client();
-            $reqapi = $httpreq->request('GET', 'https://api-frontend.kemdikbud.go.id/hit_mhs/'.$mhs);
-            $arrayMHS = [];
-            $dataMHS = json_decode($reqapi->getBody(), true);
-            foreach($dataMHS['mahasiswa'] as $mhsdata) {
-                array_push($arrayMHS, (object)[
-                    'detailMHS' => $mhsdata['text'],
-                    'linkMHS' => 'https://pddikti.kemdikbud.go.id'.$mhsdata['website-link'],
-                ]);
-            }
-
-            $result = $reqapi->getBody();
+            $getIDFilm = str_replace(" ", "+", $request->q);
+            $reqapi = $httpreq->request('GET', 'https://api.themoviedb.org/3/search/movie?query='.$getIDFilm.'&api_key='.env('APITMDB'));
             return response()->json([
                 'pesan'=>'sukses',
                 'status'=>200,
                 'nama_apikey'=>$userApiKey->nama,
-                'source'=>'https://pddikti.kemdikbud.go.id',
-                'data'=>$arrayMHS
-            ], 200);
+                'linkgambar'=>'https://image.tmdb.org/t/p/w500/{idgambar}',
+                'data'=>json_decode($reqapi->getBody())], 200);
         } catch(ClientException $err) {
             return response()->json([
                 'pesan'=>'gagal',

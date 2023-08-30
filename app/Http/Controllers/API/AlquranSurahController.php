@@ -17,7 +17,7 @@ class AlquranSurahController extends Controller
         $apikeyheaders = $request->header('apikey');
         $userApiKey = User::where('apikey', $apikeyheaders)->first();
         $Alldata = AlquranSurah::all();
-        return response()->json(['pesan'=>'sukses | masukkan nomor surah | contoh request : /api/alquran/surah/1',
+        return response()->json(['pesan'=>'sukses | masukkan nomor surah | [GET] contoh request : /api/alquran/surah/1',
         'status'=>200,
         'nama_apikey'=>$userApiKey->nama,
         'data'=>$Alldata], 200);

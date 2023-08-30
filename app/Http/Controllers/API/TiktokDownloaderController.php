@@ -18,7 +18,7 @@ class TiktokDownloaderController extends Controller
         $apikeyheaders = $request->header('apikey');
         $userApiKey = User::where('apikey', $apikeyheaders)->first();
         return response()->json([
-        'pesan'=>'gagal | id video tidak ditemukan | contoh request : /api/tiktok/7264413619281795842',
+        'pesan'=>'gagal | id video tidak ditemukan | [GET] contoh request : /api/tiktok/?id=IDTIKTOK',
         'status'=>200,
         'nama_apikey'=>$userApiKey->nama], 200);
     }
@@ -34,13 +34,13 @@ class TiktokDownloaderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id, Request $request)
+    public function show(Request $request)
     {
         try {
             $apikeyheaders = $request->header('apikey');
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
             $httpreq = new Client();
-            $reqapi = $httpreq->request('GET', 'https://api16-normal-c-useast1a.tiktokv.com/aweme/v1/feed/?aweme_id='.$id);
+            $reqapi = $httpreq->request('GET', 'https://api16-normal-c-useast1a.tiktokv.com/aweme/v1/feed/?aweme_id='.$request->id);
             $dataTiktok = json_decode($reqapi->getBody(), true);
             $validateID = $dataTiktok["aweme_list"][0]["aweme_id"]; 
             $authortt = $dataTiktok["aweme_list"][0]["author"]["nickname"];
@@ -50,7 +50,7 @@ class TiktokDownloaderController extends Controller
             $videonowmtt = $dataTiktok["aweme_list"][0]["video"]["play_addr"]["url_list"][0];
             $videowmtt = $dataTiktok["aweme_list"][0]["video"]["download_addr"]["url_list"][0];
 
-            if($validateID === $id) {
+            if($validateID === $request->id) {
                 return response()->json([             
                 'pesan'=>'sukses',
                 'status'=>200,

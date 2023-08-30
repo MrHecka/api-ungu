@@ -16,7 +16,7 @@ class AlquranAyatController extends Controller
         $apikeyheaders = $request->header('apikey');
         $userApiKey = User::where('apikey', $apikeyheaders)->first();
         $allAyat = json_decode(file_get_contents("jsonAPI/alquran_ayat.json"), true);
-        return response()->json(['pesan'=>'sukses | masukkan nomor surah untuk menampilkan ayat | contoh request : /api/alquran/ayat/1',
+        return response()->json(['pesan'=>'sukses | masukkan nomor surah untuk menampilkan ayat | [GET] contoh request : /api/alquran/ayat/1',
         'status'=>200,
         'nama_apikey'=>$userApiKey->nama,
         'data'=>$allAyat], 200);
