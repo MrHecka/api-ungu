@@ -18,7 +18,7 @@ class ApiMhsController extends Controller
         $apikeyheaders = $request->header('apikey');
         $userApiKey = User::where('apikey', $apikeyheaders)->first();
         return response()->json([
-            'pesan'=>'mahasiswa tidak ditemukan | contoh request : /api/carimahasiswa/budi','status'=>200,
+            'pesan'=>'mahasiswa tidak ditemukan | contoh request : [GET] /api/carimahasiswa/budi','status'=>200,
             'nama_apikey'=>$userApiKey->nama]
             , 200);
     }
@@ -61,10 +61,10 @@ class ApiMhsController extends Controller
         } catch(ClientException $err) {
             return response()->json([
                 'pesan'=>'gagal',
-                'status'=>400,
+                'status'=>404,
                 'nama_apikey'=>$userApiKey->nama,
                 'error'=>'Something went wrong | '.$err->getResponse()->getBody().' | '.$err->getResponse()->getStatusCode()
-            ], 400);
+            ], 404);
         }
     }
 

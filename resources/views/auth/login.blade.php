@@ -4,13 +4,14 @@
 
 @section('isikonten')
 
-<div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">
-  <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+<div class="relative flex md:h-screen sm:w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">
+
+  <div class="max-[700px]:h-120 max-[700px]:py-2 rounded-xl bg-gray-800 bg-opacity-50 px-16 py-5 shadow-lg backdrop-blur-md max-sm:px-8">
     <div class="text-white">
       <div class="mb-8 flex flex-col items-center">
-      <svg width="95px" height="95px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="a"></g> <g id="b"> <circle cx="21.5" cy="10.5" r="5.5" style="fill:#cfb1fc;"></circle> <path d="M24,9.5c0,.8284-.6716,1.5-1.5,1.5s-1.5-.6716-1.5-1.5,.6716-1.5,1.5-1.5,1.5,.6716,1.5,1.5Zm5,1.5c0,4.4111-3.5889,8-8,8-1.0234,0-2.0171-.1924-2.9629-.5732l-5.4009,4.96c-.2349,.2158-.5571,.3105-.8716,.2441l-.2905-.0576,.0312,.3213c.0298,.3135-.0889,.6221-.3213,.834l-.5796,.5293c-.1587,.1445-.3594,.2344-.5728,.2568l-.5713,.0576-.0459,.4414c-.0254,.2422-.1382,.4678-.3179,.6328l-1.7397,1.5996c-.1875,.1719-.4302,.2637-.6768,.2637-.1104,0-.2217-.0186-.3291-.0557l-1.9502-.6797c-.2871-.0996-.5132-.3252-.6143-.6123l-.7397-2.0996c-.126-.3584-.0381-.7568,.2266-1.0293L13.4346,13.5947c-.2886-.8369-.4346-1.7061-.4346-2.5947,0-4.4111,3.5889-8,8-8s8,3.5889,8,8Zm-2,0c0-3.3086-2.6914-6-6-6s-6,2.6914-6,6c0,.8369,.1733,1.6533,.5151,2.4258,.165,.373,.0869,.8096-.1978,1.1016L5.1396,24.9834l.3735,1.0605,.9307,.3242,1.0205-.9375,.0908-.874c.0488-.4707,.4219-.8438,.8931-.8916l1.0156-.1035-.1094-1.1357c-.0303-.3145,.0903-.625,.3247-.8379,.2349-.2109,.5557-.3037,.8662-.2383l1.1118,.2207,5.5137-5.0625c.3066-.2832,.7563-.3438,1.1274-.1562,.8511,.4307,1.7603,.6484,2.7017,.6484,3.3086,0,6-2.6914,6-6Z" style="fill:#96c;"></path> </g> </g></svg>
+        <svg width="96px" height="96px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#de17b3"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 14V18" stroke="#82279b" stroke-width="1.5" stroke-linecap="round"></path> <path d="M6 10V8C6 7.65929 6.0284 7.32521 6.08296 7M18 10V8C18 4.68629 15.3137 2 12 2C10.208 2 8.59942 2.78563 7.5 4.03126" stroke="#82279b" stroke-width="1.5" stroke-linecap="round"></path> <path d="M11 22H8C5.17157 22 3.75736 22 2.87868 21.1213C2 20.2426 2 18.8284 2 16C2 13.1716 2 11.7574 2.87868 10.8787C3.75736 10 5.17157 10 8 10H16C18.8284 10 20.2426 10 21.1213 10.8787C22 11.7574 22 13.1716 22 16C22 18.8284 22 20.2426 21.1213 21.1213C20.2426 22 18.8284 22 16 22H15" stroke="#82279b" stroke-width="1.5" stroke-linecap="round"></path></g></svg>  
       <br>
-        <h1 class="mb-2 text-2xl font-bold">Login Dulu Nye.</h1>
+        <h1 class="mb-2 text-2xl font-bold">Login Dulu Bang.</h1>
         <span class="text-gray-300">Masukkan Email & Password Dulu Woyyy!😡</span>
       </div>
 

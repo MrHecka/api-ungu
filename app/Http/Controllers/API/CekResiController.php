@@ -21,17 +21,17 @@ class CekResiController extends Controller
             $httpreq = new Client();
             $reqapi = $httpreq->request('GET', 'https://api.binderbyte.com/v1/list_courier?api_key='.env('APIRESI'));
             return response()->json([
-                'pesan'=>'resi/layanan tidak ditemukan | contoh request : /api/cekresi/jne?&resi=142080117721233',
+                'pesan'=>'resi/layanan tidak ditemukan | [GET] contoh request : /api/cekresi/jne?&resi=142080117721233',
                 'status'=>200,
                 'nama_apikey'=>$userApiKey->nama,
                 'listkurir'=>json_decode($reqapi->getBody())], 200);
         } catch(ClientException $err) {
             return response()->json([
                 'pesan'=>'gagal',
-                'status'=>400,
+                'status'=>404,
                 'nama_apikey'=>$userApiKey->nama,
                 'error'=>'Something went wrong | '.$err->getResponse()->getBody().' | '.$err->getResponse()->getStatusCode()
-            ], 400);
+            ], 404);
         }
     }
 
@@ -62,10 +62,10 @@ class CekResiController extends Controller
         } catch(ClientException $err) {
                 return response()->json([
                     'pesan'=>'gagal',
-                    'status'=>400,
+                    'status'=>404,
                     'nama_apikey'=>$userApiKey->nama,
                     'error'=>'Something went wrong | '.$err->getResponse()->getBody().' | '.$err->getResponse()->getStatusCode()
-                ], 400);
+                ], 404);
         }
     }
     /**

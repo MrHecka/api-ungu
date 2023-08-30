@@ -16,13 +16,20 @@ class DbUsers extends Seeder
      */
     public function run(): void
     {
+
+        // REMOVE ALL INCREMENTING TABLE (RESET ROWS)
+        DB::table('users')->truncate();
+
         DB::table('users')->insert([
-            'nama' => 'Nyenye',
-            'email' => 'nyenye@gmail.com',
-            'nohp' => '087829190342',
-            'password' => Hash::Make('nyenye'),
-            'tgl_pembuatan' => Carbon::now(),
-            'apikey' => Str::random(32),
+            'id' => Str::uuid(),
+            'nama'=>'Nyenye',
+            'email'=>'nyenye@gmail.com',
+            'nohp'=>'087829190342',
+            'password'=>Hash::Make('nyenye'),
+            'is_dewa'=>1,
+            'tgl_pembuatan'=>Carbon::now(),
+            'apikey'=>Str::random(32),
+            'wlip'=>'202.80.212.176,127.0.0.1',
         ]);
     }
 }

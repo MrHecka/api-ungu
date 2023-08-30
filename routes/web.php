@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\pageController;
@@ -37,3 +38,9 @@ Route::controller(pageController::class)->group(function () {
     Route::get('/profil/gantiPassword', 'gantiPassword')->middleware('isUser')->name('profil.gantiPassword');
     Route::post('/profil/updatePassword', 'store')->middleware('isUser')->name('profil.updatePassword');
 });
+
+// ADMIN CONTROLLER
+Route::middleware(['isUser', 'isDewa'])->group(function() {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+});
+
