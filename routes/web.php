@@ -33,5 +33,7 @@ Route::controller(pageController::class)->group(function () {
     Route::get('/dashboard', 'dashboard')->middleware('isUser')->name('dashboard');
     Route::get('/docs', 'docs')->middleware('isUser')->name('docs');
     Route::get('/profil', 'profil')->middleware('isUser')->name('profil');
-    Route::post('/profil/update', 'update')->middleware('isUser')->name('profile.update');
+    Route::post('/profil/update', 'update')->middleware('isUser')->name('profil.update');
+    Route::get('/profil/gantiPassword', 'gantiPassword')->middleware('isUser')->name('profil.gantiPassword');
+    Route::post('/profil/updatePassword', 'store')->middleware('isUser')->name('profil.updatePassword');
 });

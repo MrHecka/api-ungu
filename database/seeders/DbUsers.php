@@ -17,12 +17,12 @@ class DbUsers extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            'nama'=>'Nyenye',
-            'email'=>'nyenye@gmail.com',
-            'nohp'=>'087829190342',
-            'password'=>Hash::Make('nyenye'),
-            'tgl_pembuatan'=>Carbon::now(),
-            'apikey'=>Str::random(32),
+            'nama' => 'Nyenye',
+            'email' => 'nyenye@gmail.com',
+            'nohp' => '087829190342',
+            'password' => Hash::Make('nyenye'),
+            'tgl_pembuatan' => Carbon::now(),
+            'apikey' => Str::random(32),
         ]);
     }
 }
