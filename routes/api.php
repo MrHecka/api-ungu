@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ApiMhsController;
 use App\Http\Controllers\API\bmkgController;
+use App\Http\Controllers\API\cariAnimeController;
 use App\Http\Controllers\API\CekResiController;
 use App\Http\Controllers\API\freeEGController;
 use App\Http\Controllers\API\TiktokDownloaderController;
+use App\Http\Controllers\API\cariFilmController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,11 +43,20 @@ Route::get('alquran/ayat/{id}', [AlquranAyatController::class, 'show'])->name('a
 
 // API TIKTOK DOWNLOADER
 Route::get('tiktok', [TiktokDownloaderController::class, 'index'])->name('tiktokdownloader.index');
-Route::get('tiktok/{id}', [TiktokDownloaderController::class, 'show'])->name('tiktokdownloader.show');
+Route::get('tiktok/', [TiktokDownloaderController::class, 'show'])->name('tiktokdownloader.show');
 
 // BMKG API
 Route::get('bmkg/gempaterbaru', [bmkgController::class, 'index'])->name('bmkggempa.index');
 
 // FREE GAMES API
 Route::get('freegames/epicgames', [freeEGController::class, 'index'])->name('freeepicgames.index');
+
+// CARI FILM
+Route::get('/film/cari', [cariFilmController::class, 'index'])->name('carifilm.index');
+Route::get('/film/cari/', [cariFilmController::class, 'show'])->name('carifilm.show');
+
+// CARI ANIME
+Route::get('/anime/carianime', [cariAnimeController::class, 'index'])->name('carianime.index');
+Route::post('/anime/carianime', [cariAnimeController::class, 'store'])->name('carianime.store');
+Route::get('/anime/carianime/', [cariAnimeController::class, 'show'])->name('carianime.show');
 
