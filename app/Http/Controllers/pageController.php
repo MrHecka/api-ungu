@@ -26,6 +26,11 @@ class pageController extends Controller
         ]);
     }
 
+    public function about()
+    {
+        return view('/page/about');
+    }
+
     public function profil()
     {
         $nama = Auth::user()->nama;

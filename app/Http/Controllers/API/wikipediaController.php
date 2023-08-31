@@ -20,7 +20,7 @@ class wikipediaController extends Controller
         try {
             $apikeyheaders = $request->header('apikey');
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
-            $httpreq = new Client();
+            $httpreq = new Client(['timeout' => 20]);
             $reqapi = $httpreq->request('GET', 'https://id.wikipedia.org/wiki/Wikipedia:Tahukah_Anda');
             $htmlString = (string) $reqapi->getBody();
             libxml_use_internal_errors(true);

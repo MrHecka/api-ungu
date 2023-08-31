@@ -6,7 +6,7 @@
 
 @section('isikonten')
 
-<div class="overflow-y-auto pt-16 flex flex-col h-screen w-full inline items-center text-lg text-white text-left font-sans justify-center font-bold bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">
+<div class="overflow-y-auto pt-16 flex flex-col h-screen w-full inline items-center text-md text-white text-left font-sans justify-center font-bold bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">
 <div class="text-white text-left">
     <p class="text-2xl">API-UNGU DOCS</p>
 
@@ -18,8 +18,9 @@
                 </button>
             </h2>
             <div id="accordion-flush-body-{{ $loop->iteration }}" class="hidden" aria-labelledby="accordion-flush-heading-{{ $loop->iteration }}">
-                <div class="p-5 border border-b-1 bg-white-900 border-white-200 dark:border-white-700 dark:bg-white-900">
-                    <pre class="mb-2 text-white-500 dark:text-white-400 flex-grow">{{ $apiDocs['docs'] }}</pre>
+                <div class="p-5 border border-b-1 bg-gray-900 border-white-200 dark:border-white-700 dark:bg-gray-900">
+                    <p>Response:</p>
+                    <pre class="mb-2 text-white-500 dark:text-white-400 flex-grow">{{ json_encode($apiDocs['docs'], JSON_PRETTY_PRINT) }}</pre>
                 </div>
             </div>
         @endforeach

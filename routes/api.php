@@ -62,4 +62,4 @@ Route::post('/anime/carianime', [cariAnimeController::class, 'store'])->name('ca
 Route::get('/anime/carianime/', [cariAnimeController::class, 'show'])->name('carianime.show');
 
 // WIKIPEDIA TAHUKAH ANDA?
-Route::get('/wikipedia/tahukahanda/', [wikipediaController::class, 'index'])->name('tahukahanda.index');
+Route::get('/wikipedia/tahukahanda', [wikipediaController::class, 'index'])->name('tahukahanda.index');

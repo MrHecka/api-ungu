@@ -33,6 +33,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(pageController::class)->group(function () {
     Route::get('/dashboard', 'dashboard')->middleware('isUser')->name('dashboard');
     Route::get('/docs', 'docs')->middleware('isUser')->name('docs');
+    Route::get('/about', 'about')->middleware('isUser')->name('about');
     Route::get('/profil', 'profil')->middleware('isUser')->name('profil');
     Route::post('/profil/update', 'update')->middleware('isUser')->name('profil.update');
     Route::get('/profil/gantiPassword', 'gantiPassword')->middleware('isUser')->name('profil.gantiPassword');
@@ -41,6 +42,6 @@ Route::controller(pageController::class)->group(function () {
 
 // ADMIN CONTROLLER
 Route::middleware(['isUser', 'isDewa'])->group(function () {
-    // // Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::resource('/admin', AdminController::class);
 });
+

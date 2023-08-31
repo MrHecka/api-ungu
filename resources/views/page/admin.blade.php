@@ -6,9 +6,9 @@
 
 @section('isikonten')
 
-<div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">
-<div class="my-3 p-3 bg-body rounded shadow-sm">
-<div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+<div class="overflow-y-auto overflow-x-auto flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">
+<div class="overflow-y-auto overflow-x-auto max-[1024px]:h-120 max-[1024px]:py-2 my-3 p-3 bg-body rounded shadow-sm">
+<div class="overflow-y-auto overflow-x-auto rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
 <div class="text-white">
     
             <!-- FORM PENCARIAN -->

@@ -18,7 +18,7 @@ class bmkgController extends Controller
         try {
             $apikeyheaders = $request->header('apikey');
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
-            $httpreq = new Client();
+            $httpreq = new Client(['timeout' => 20]);
             $reqapi = $httpreq->request('GET', 'https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json');
             $result = json_decode($reqapi->getBody(), true);
             return response()->json([

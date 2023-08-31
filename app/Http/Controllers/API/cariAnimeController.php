@@ -49,7 +49,7 @@ class cariAnimeController extends Controller
             $base64 = base64_encode($source);
             $blob = 'data:'.$image->getMimeType().';base64,'.$base64;
 
-            $httpreq = new Client();
+            $httpreq = new Client(['timeout' => 20]);
             $uploadFile  = $httpreq->request('POST', 'https://api.trace.moe/search', 
                 [
                     'multipart' => [
@@ -87,7 +87,7 @@ class cariAnimeController extends Controller
         try {
             $apikeyheaders = $request->header('apikey');
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
-            $httpreq = new Client();
+            $httpreq = new Client(['timeout' => 20]);
             $reqapi = $httpreq->request('GET', 'https://api.trace.moe/search?url='.urlencode($request->url));
             return response()->json([
                 'pesan'=>'sukses',

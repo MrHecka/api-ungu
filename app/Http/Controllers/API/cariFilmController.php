@@ -39,7 +39,7 @@ class cariFilmController extends Controller
         try {
             $apikeyheaders = $request->header('apikey');
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
-            $httpreq = new Client();
+            $httpreq = new Client(['timeout' => 20]);
             $getIDFilm = str_replace(" ", "+", $request->q);
             $reqapi = $httpreq->request('GET', 'https://api.themoviedb.org/3/search/movie?query='.$getIDFilm.'&api_key='.env('APITMDB'));
             return response()->json([
