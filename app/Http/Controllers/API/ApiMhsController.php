@@ -18,7 +18,8 @@ class ApiMhsController extends Controller
         $apikeyheaders = $request->header('apikey');
         $userApiKey = User::where('apikey', $apikeyheaders)->first();
         return response()->json([
-            'pesan'=>'mahasiswa tidak ditemukan | contoh request : [GET] /api/carimahasiswa/budi','status'=>200,
+            'pesan'=>'mahasiswa tidak ditemukan | contoh request : [GET] /api/carimahasiswa/budi',
+            'status'=>200,
             'nama_apikey'=>$userApiKey->nama]
             , 200);
     }

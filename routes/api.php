@@ -11,6 +11,7 @@ use App\Http\Controllers\API\CekResiController;
 use App\Http\Controllers\API\freeEGController;
 use App\Http\Controllers\API\TiktokDownloaderController;
 use App\Http\Controllers\API\cariFilmController;
+use App\Http\Controllers\API\wikipediaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +61,5 @@ Route::get('/anime/carianime', [cariAnimeController::class, 'index'])->name('car
 Route::post('/anime/carianime', [cariAnimeController::class, 'store'])->name('carianime.store');
 Route::get('/anime/carianime/', [cariAnimeController::class, 'show'])->name('carianime.show');
 
+// WIKIPEDIA TAHUKAH ANDA?
+Route::get('/wikipedia/tahukahanda/', [wikipediaController::class, 'index'])->name('tahukahanda.index');
