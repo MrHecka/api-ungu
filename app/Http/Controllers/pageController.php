@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
-class pageController extends Controller implements Rule
+class pageController extends Controller
 {
   
     public function dashboard()
@@ -45,14 +45,14 @@ class pageController extends Controller implements Rule
     public function update(Request $request)
     {
         $user = Auth::user();
-        // Validate the input data
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
             'nohp' => 'required|string|max:13|unique:users,nohp,' . $user->id,
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'g-recaptcha-response' => 'required|captcha',
-            'apikey' => 'required|min:32|max:32|string|unique:users,apikey,' . $user->id
-            // Add more validation rules as needed
+            'apikey' => 'required|min:32|max:32|string|unique:users,apikey,' . $user->id,
+            'wlip'=>'max:255'
+
         ], [
             'nama.required' => 'Nama nya diisi dulu oyy😡',
             'nama.max' => 'Harap masukkan maximal 255😡',
@@ -67,12 +67,13 @@ class pageController extends Controller implements Rule
             'apikey.max' => 'Harap masukkan maximal 32',
         ]);
 
-        // Update the user's profile data
+
         $user->update([
             'nama' => $request->nama,
             'nohp' => $request->nohp,
             'email' => $request->email,
             'apikey' => $request->apikey,
+            'wlip' => $request->wlip
         ]);
 
         // Redirect back with a success message
@@ -118,4 +119,4 @@ class pageController extends Controller implements Rule
 
 }
 
-}
+
