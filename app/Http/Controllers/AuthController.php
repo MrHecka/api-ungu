@@ -13,16 +13,18 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view("auth/login");
     }
 
-    public function loginGan(Request $request) {;
-        Session::flash('email',$request->email);
+    public function loginGan(Request $request)
+    {;
+        Session::flash('email', $request->email);
 
         $request->validate([
-            'email'=>'required',
-            'password'=> 'required',
+            'email' => 'required',
+            'password' => 'required',
             'g-recaptcha-response' => 'required|captcha'
         ],[
             'email.required'=>'Email nya diisi dulu oyy',
@@ -35,22 +37,24 @@ class AuthController extends Controller
             'password' => $request->password
         ];
 
-        if(Auth::attempt($dataLogin)) {
+        if (Auth::attempt($dataLogin)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard')->with('success','Berhasil Login✔');
+            return redirect()->intended('/dashboard')->with('success', 'Berhasil Login✔');
         } else {
             return redirect('auth')->withErrors('Email atau Password salah!');
         }
     }
 
-    public function register() {
+    public function register()
+    {
         return view('/auth/register');
     }
 
-    public function createUser(Request $request) {
-        Session::flash('nama',$request->nama);
-        Session::flash('email',$request->email);
-        Session::flash('nohp',$request->nohp);
+    public function createUser(Request $request)
+    {
+        Session::flash('nama', $request->nama);
+        Session::flash('email', $request->email);
+        Session::flash('nohp', $request->nohp);
 
         $request->validate([
             'nama'=>['required','regex:/^[a-zA-Z ]*$/','max:255'],
@@ -78,12 +82,12 @@ class AuthController extends Controller
         ]);
 
         $dataRegister = [
-            'nama'=>$request->nama,
-            'email'=>$request->email,
-            'nohp'=>$request->nohp,
-            'password'=>Hash::Make($request->password),
-            'tgl_pembuatan'=>Carbon::now(),
-            'apikey'=>Str::random(32),
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'nohp' => $request->nohp,
+            'password' => Hash::Make($request->password),
+            'tgl_pembuatan' => Carbon::now(),
+            'apikey' => Str::random(32),
         ];
 
         User::create($dataRegister);
@@ -93,19 +97,17 @@ class AuthController extends Controller
             'password' => $request->password
         ];
 
-        if(Auth::attempt($infoRegister)) {
+        if (Auth::attempt($infoRegister)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard')->with('success','Berhasil Daftar Dan Login✔');
+            return redirect()->intended('/dashboard')->with('success', 'Berhasil Daftar Dan Login✔');
         } else {
             return redirect('auth')->withErrors('Email atau Password salah!');
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         Auth::logout();
-        return redirect('/auth')->with('success','Berhasil Logout✔');
+        return redirect('/auth')->with('success', 'Berhasil Logout✔');
     }
-
 }
-
-

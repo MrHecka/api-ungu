@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class pageController extends Controller
-{
-    public function dashboard() {
-        $usernameAuth = Auth::user()->nama;
-        return view('/page/dashboard')->with(['userName'=>$usernameAuth]);
-    }
 
+class pageController extends Controller implements Rule
+{
+  
+    public function dashboard()
+    {
+        $usernameAuth = Auth::user()->nama;
+        return view('/page/dashboard')->with(['userName' => $usernameAuth]);
+    }
 
 
     public function docs()
@@ -24,10 +26,21 @@ class pageController extends Controller
         ]);
     }
 
-    public function profil() {
-        return view('/page/profil');
-    }
+    public function profil()
+    {
+        $nama = Auth::user()->nama;
+        $nohp = Auth::user()->nohp;
+        $email = Auth::user()->email;
+        $apikey = Auth::user()->apikey;
 
+        return view('/page/profil')->with([
+            'nama' => $nama,
+            'nohp' => $nohp,
+            'email' => $email,
+            'apikey' => $apikey
+
+        ]);
+    }
 
     public function update(Request $request)
     {
@@ -54,7 +67,7 @@ class pageController extends Controller
             'apikey.max' => 'Harap masukkan maximal 32',
         ]);
 
-
+        // Update the user's profile data
         $user->update([
             'nama' => $request->nama,
             'nohp' => $request->nohp,
@@ -62,6 +75,7 @@ class pageController extends Controller
             'apikey' => $request->apikey,
         ]);
 
+        // Redirect back with a success message
         return redirect()->route('profil')->with('success', 'Profil Berhasil Di Update!');
     }
 
@@ -104,3 +118,4 @@ class pageController extends Controller
 
 }
 
+}

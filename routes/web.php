@@ -21,23 +21,26 @@ Route::get('/', function () {
 });
 
 // AUTH ROUTER CONTROLLER
-Route::controller(AuthController::class)->group(function() {
-    Route::get('/auth','index')->middleware('isGuest')->name('login');
-    Route::post('/auth/login','loginGan')->middleware('isGuest')->name('postlogin');
-    Route::get('/auth/register','register')->middleware('isGuest')->name('register');
-    Route::post('/auth/registme','createUser')->middleware('isGuest')->name('postregister');
-    Route::get('/auth/logout','logout')->name('logout');
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/auth', 'index')->middleware('isGuest')->name('login');
+    Route::post('/auth/login', 'loginGan')->middleware('isGuest')->name('postlogin');
+    Route::get('/auth/register', 'register')->middleware('isGuest')->name('register');
+    Route::post('/auth/registme', 'createUser')->middleware('isGuest')->name('postregister');
+    Route::get('/auth/logout', 'logout')->name('logout');
 });
 
 // PAGE CONTROLLER
-Route::controller(pageController::class)->group(function() {
+Route::controller(pageController::class)->group(function () {
     Route::get('/dashboard', 'dashboard')->middleware('isUser')->name('dashboard');
     Route::get('/docs', 'docs')->middleware('isUser')->name('docs');
     Route::get('/profil', 'profil')->middleware('isUser')->name('profil');
+    Route::post('/profil/update', 'update')->middleware('isUser')->name('profil.update');
+    Route::get('/profil/gantiPassword', 'gantiPassword')->middleware('isUser')->name('profil.gantiPassword');
+    Route::post('/profil/updatePassword', 'store')->middleware('isUser')->name('profil.updatePassword');
 });
 
 // ADMIN CONTROLLER
-Route::middleware(['isUser', 'isDewa'])->group(function() {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::middleware(['isUser', 'isDewa'])->group(function () {
+    // // Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::resource('/admin', AdminController::class);
 });
-
