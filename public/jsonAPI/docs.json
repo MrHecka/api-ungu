@@ -1,0 +1,238 @@
+[
+    {
+        "methodReq" : "GET",
+        "title": "/api/carimahasiswa/{id}",
+        "docs": {
+            "pesan": "sukses",
+            "status": "200",
+            "nama_apikey": "Mr Bambang",
+            "source": "https://pddikti.kemdikbud.go.id",
+            "data": [
+            {
+                "detailMHS": "string",
+                "linkMHS": "string"
+            }]
+        }
+    },
+    {
+        "methodReq" : "GET",
+        "title": "/api/cekresi/{ekspedisi}/?resi={noresi}",
+        "docs": {
+            "pesan": "sukses",
+            "status": "200",
+            "nama_apikey": "Mr Bambang",
+            "data": {
+                "pesan": "sukses",
+                "status": 200,
+                "nama_apikey": "Mr Bambang",
+                "data": {
+                    "summary": {
+                        "awb": "string",
+                        "courier": "string",
+                        "service": "string",
+                        "status": "string",
+                        "date": "string",
+                        "desc": "string",
+                        "amount": "string",
+                        "weight": "string"
+                    },
+                    "detail": {
+                        "origin": "string",
+                        "destination": "string",
+                        "shipper": "string",
+                        "receiver": "string"
+                    },
+                    "history": [
+                        {
+                            "date": "string",
+                            "desc": "string",
+                            "location": "string"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "methodReq" : "GET",
+        "title": "/api/alquran/surah/{id}",
+        "docs": {
+                "pesan": "sukses",
+                "status": 200,
+                "nama_apikey": "Mr Bambang",
+                "data": {
+                    "id": "int",
+                    "arti": "string",
+                    "asma": "string",
+                    "ayat": "string",
+                    "nama": "string",
+                    "type": "string",
+                    "urut": "string",
+                    "audio": "string",
+                    "nomor": "string",
+                    "rukuk": "string",
+                    "keterangan": "string"
+                }
+        }
+    },
+    {
+        "methodReq" : "GET",
+        "title": "/api/alquran/ayat/{id}",
+        "docs": {
+                "pesan": "sukses",
+                "status": 200,
+                "nama_apikey": "Mr Bambang",
+                "data": [
+                    {
+                        "ar": "string",
+                        "id": "string",
+                        "tr": "string",
+                        "nomor": "string"
+                    }
+                ]
+        }
+    },
+    {
+        "methodReq" : "GET",
+        "title": "/api/tiktok/?id={idtiktok}",
+        "docs": {
+            "pesan": "sukses",
+            "status": 200,
+            "nama_apikey": "Mr Bambang",
+            "data": {
+                "author_name": "string",
+                "author_avatar": "string",
+                "title_video": "string",
+                "music_video": "string",
+                "video_nowm": "string",
+                "video_wm": "string"
+            }
+        }
+    },
+    {
+        "methodReq" : "GET",
+        "title": "/api/bmkg/gempaterbaru",
+        "docs": {
+            "pesan": "sukses",
+            "status": 200,
+            "nama_apikey": "Mr Bambang",
+            "source": "https://data.bmkg.go.id/",
+            "data": {
+                "Infogempa": {
+                    "gempa": {
+                        "Tanggal": "string",
+                        "Jam": "string",
+                        "DateTime": "string",
+                        "Coordinates": "string",
+                        "Lintang": "string",
+                        "Bujur": "string",
+                        "Magnitude": "string",
+                        "Kedalaman": "string",
+                        "Wilayah": "string",
+                        "Potensi": "string",
+                        "Dirasakan": "string",
+                        "Shakemap": "string"
+                    }
+                }
+            },
+            "linkgambar": "string"
+        }
+    },
+    {
+        "methodReq" : "GET",
+        "title": "/api/freegames/epicgames",
+        "docs": {
+            "pesan": "sukses",
+            "status": 200,
+            "nama_apikey": "Mr Bambang",
+            "source": "https://store.epicgames.com/en-US/free-games/",
+            "data": [
+                    {
+                        "judul": "string",
+                        "deskripsi": "string",
+                        "status": "string",
+                        "gambar": "string",
+                        "link": "string"
+                    }
+                ]
+            }
+    },
+    {
+        "methodReq" : "GET",
+        "title": "/api/film/cari/?q={namafilm}",
+        "docs": {
+            "pesan": "sukses",
+            "status": 200,
+            "nama_apikey": "Mr Bambang",
+            "linkgambar": "https://image.tmdb.org/t/p/w500/{idgambar}",
+            "data": {
+                "page": "int",
+                "results": [
+                    {
+                        "adult": "boolean",
+                        "backdrop_path": "string",
+                        "genre_ids": [
+                            "int",
+                            "int",
+                            "int"
+                        ],
+                        "id": "int",
+                        "original_language": "string",
+                        "original_title": "string",
+                        "overview": "string",
+                        "popularity": "int",
+                        "poster_path": "string",
+                        "release_date": "string",
+                        "title": "string",
+                        "video": "boolean",
+                        "vote_average": "int",
+                        "vote_count": "int"
+                    }
+                ],
+                "total_pages": "int",
+                "total_results": "int"
+            }
+        }
+    },
+    {
+        "methodReq" : "GET & POST",
+        "title": "/api/anime/carianime",
+        "docs": {
+            "pesan": "sukses",
+            "status": 200,
+            "nama_apikey": "Mr Bambang",
+            "data": {
+                "frameCount": 12429326,
+                "error": "",
+                "result": [
+                    {
+                        "anilist": "int",
+                        "filename": "string",
+                        "episode": "int",
+                        "from": "float",
+                        "to": "float",
+                        "similarity": "float",
+                        "video": "string",
+                        "image": "string"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "methodReq" : "GET",
+        "title": "/api/wikipedia/tahukahanda",
+        "docs": {
+            "pesan": "sukses",
+            "status": 200,
+            "source": "https://id.wikipedia.org/wiki/Wikipedia:Tahukah_Anda",
+            "nama_apikey": "Mr Bambang",
+            "data": [
+                "string\"\r",
+                "string\"\r",
+                "string\"\r",
+                "string\"\r"
+            ]
+        }
+    }
+]

@@ -18,7 +18,7 @@ class freeEGController extends Controller
         try {
             $apikeyheaders = $request->header('apikey');
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
-            $httpreq = new Client();
+            $httpreq = new Client(['timeout' => 20]);
             $reqapi = $httpreq->request('GET', 'https://store-site-backend-static-ipv4.ak.epicgames.com/freeGamesPromotions?locale=en-US&country=ID&allowCountries=ID');
             $result = json_decode($reqapi->getBody(), true)['data']['Catalog']['searchStore']['elements'];
             $arrayEG = [];

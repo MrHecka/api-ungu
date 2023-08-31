@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <link rel="icon" type="image/x-icon" href="{{url('img/faviconHead.ico')}}">
     <title>API|UNGU</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css','resources/js/app.js'])
   </head>
 
 {{-- SPIN PRELOADER --}}
@@ -29,9 +29,13 @@
             </div>
       
             <div class="p-4 hidden md:flex flex-row justify-between font-bold">
-              @if (Auth::check())
+              @if(Auth::check())
+                  @if(Auth::user()->is_dewa)
+                    <a href="{{ url('admin') }}" class="animate-in slide-in-from-top transform transition-all hover:scale-125 mx-4 text-lg border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500">Admin</a>
+                  @endif
                 <a href="{{ route('dashboard') }}" class="animate-in slide-in-from-top transform transition-all hover:scale-125 mx-4 text-lg border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500">Dashboard</a>
                 <a href="{{ route('docs') }}" class="animate-in slide-in-from-top transform transition-all hover:scale-125 mx-4 text-lg border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500">Docs</a>
+                <a href="{{ route('about') }}" class="animate-in slide-in-from-top transform transition-all hover:scale-125 mx-4 text-lg border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500">Tentang Kami</a>
                 <a href="{{ route('profil') }}" class="animate-in slide-in-from-top transform transition-all hover:scale-125 mx-4 text-lg border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300 transition duration-500">Profil</a>
                 <a href="{{ route('logout') }}" class="animate-in slide-in-from-top transform transition-all hover:scale-125 mx-4 text-lg border-b-2 border-transparent hover:border-b-2 hover:border-indigo-300">Logout</a>
               @else
@@ -54,8 +58,12 @@
           <div id="nav-opened" class="fixed left-0 right-0 hidden bg-purple-500 mx-2 mt-16 bg-opacity-50 rounded-br rounded-bl shadow z-10">
             <div class="p-2 divide-y divide-gray-600 flex flex-col">
               @if (Auth::check())
+                @if(Auth::user()->is_dewa)
+                <a href="{{ url('admin') }}" class="animate-in slide-in-from-top p-2 font-semibold text-white hover:text-indigo-500">Admin</a>
+                @endif
               <a href="{{ route('dashboard') }}" class="animate-in slide-in-from-top p-2 font-semibold text-white hover:text-indigo-500">Dashboard</a>
               <a href="{{ route('docs') }}" class="animate-in slide-in-from-top p-2 font-semibold text-white hover:text-indigo-500">Docs</a>
+              <a href="{{ route('about') }}" class="animate-in slide-in-from-top p-2 font-semibold text-white hover:text-indigo-500">Tentang Kami</a>
               <a href="{{ route('profil') }}" class="animate-in slide-in-from-top p-2 font-semibold text-white hover:text-indigo-500">Profil</a>
               <a href="{{ route('logout') }}" class="animate-in slide-in-from-top p-2 font-semibold text-white hover:text-indigo-500">Logout</a>
               @else

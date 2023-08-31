@@ -40,7 +40,7 @@ class ApiMhsController extends Controller
         try {
             $apikeyheaders = $request->header('apikey');
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
-            $httpreq = new Client();
+            $httpreq = new Client(['timeout' => 20]);
             $reqapi = $httpreq->request('GET', 'https://api-frontend.kemdikbud.go.id/hit_mhs/'.$mhs);
             $arrayMHS = [];
             $dataMHS = json_decode($reqapi->getBody(), true);

@@ -9,6 +9,8 @@ export default {
     theme: {
         extend: {},
     },
+
+
     plugins: [
     require("tailwindcss-animate"),
     require('flowbite/plugin')
