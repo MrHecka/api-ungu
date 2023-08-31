@@ -25,7 +25,7 @@ class pageController extends Controller
     }
 
     public function profil() {
-        return view('/page/dashboard');
+        return view('/page/profil');
     }
 
 
