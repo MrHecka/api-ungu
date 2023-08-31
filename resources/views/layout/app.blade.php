@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <link rel="icon" type="image/x-icon" href="{{url('img/faviconHead.ico')}}">
     <title>API|UNGU</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css','resources/js/app.js'])
   </head>
 
 {{-- SPIN PRELOADER --}}

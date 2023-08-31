@@ -20,7 +20,7 @@ class pageController extends Controller
 
     public function docs()
     {
-        $apiLists = json_decode(file_get_contents('jsonAPI/docs'), true);
+        $apiLists = json_decode(file_get_contents('jsonAPI/docs.json'), true);
         return view('/page/docs')->with([
             'apiLists'=>$apiLists
         ]);

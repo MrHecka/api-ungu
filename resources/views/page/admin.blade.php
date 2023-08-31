@@ -10,6 +10,7 @@
 <div class="my-3 p-3 bg-body rounded shadow-sm">
 <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
 <div class="text-white">
+    
             <!-- FORM PENCARIAN -->
             
             <div class="mb-3">

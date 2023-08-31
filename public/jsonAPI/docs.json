@@ -1,0 +1,7 @@
+[
+    {
+        "methodReq" : "GET",
+        "title": "/api/carimahasiswa/{id}",
+        "docs": "{'pesan': 'sukses','status': '200','nama_apikey': 'Mr Bambang','source': 'https://pddikti.kemdikbud.go.id','data': [{detailMHS: ...,linkMHS: ...}]}"
+    }
+]

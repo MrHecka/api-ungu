@@ -15,7 +15,7 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         $katakunci = $request->katakunci;
-        $jumlahbaris = 4;
+        $jumlahbaris = 5;
         if (strlen($katakunci)) {
             $data = User::where('nama', 'like', "%$katakunci%")
                 ->orWhere('nama', 'like', "%$katakunci%")->orWhere('email', 'like', "%$katakunci%")->paginate($jumlahbaris);
