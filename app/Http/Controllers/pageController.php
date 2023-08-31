@@ -5,22 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
-
 
 
 class pageController extends Controller implements Rule
 {
+  
     public function dashboard()
     {
         $usernameAuth = Auth::user()->nama;
         return view('/page/dashboard')->with(['userName' => $usernameAuth]);
     }
 
+
     public function docs()
     {
-        return view('/page/dashboard');
+        $apiLists = json_decode(file_get_contents('jsonAPI/docs'), true);
+        return view('/page/docs')->with([
+            'apiLists'=>$apiLists
+        ]);
     }
 
     public function profil()
@@ -37,17 +40,6 @@ class pageController extends Controller implements Rule
             'apikey' => $apikey
 
         ]);
-    }
-
-
-    // edit profil namalengkap, no hp, email, apikey
-    public function edit()
-    {
-        // Retrieve user data for editing
-        $user = auth()->user(); // Assuming you're using authentication
-
-        // Pass the user data to the view for rendering
-        return view('profile.edit', compact('user'));
     }
 
     public function update(Request $request)
@@ -75,8 +67,6 @@ class pageController extends Controller implements Rule
             'apikey.max' => 'Harap masukkan maximal 32',
         ]);
 
-
-
         // Update the user's profile data
         $user->update([
             'nama' => $request->nama,
@@ -89,20 +79,7 @@ class pageController extends Controller implements Rule
         return redirect()->route('profil')->with('success', 'Profil Berhasil Di Update!');
     }
 
-    public function passes($attribute, $value)
-    {
-        return Hash::check($value, auth()->user()->password);
-    }
 
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
-    public function message()
-    {
-        return 'The :attribute is match with old password.';
-    }
 
     public function gantiPassword()
     {
@@ -112,7 +89,7 @@ class pageController extends Controller implements Rule
     public function store(Request $request)
     {
         $request->validate([
-            'old_password' => ['required', new pageController],
+            'old_password' => ['required'],
             'password' => ['required'],
             'password_confirmation' => ['same:password'],
             'g-recaptcha-response' => 'required|captcha',
@@ -120,11 +97,25 @@ class pageController extends Controller implements Rule
             'g-recaptcha-response.required' => 'Isi captcha dulu woyy dasar bot😡',
             'old_password.required' => 'Harap isi password lama😡',
             'password.required' => 'Harap isi password baru😡',
+            'password.same' => 'Password baru tidak boleh sama dengan password lama!',
             'password_confirmation.required' => 'Harap isi konfirmasi password😡'
         ]);
-        $user = auth()->user();
-        $user->update(['password' => Hash::make($request->password)]);
 
-        return redirect()->intended('/profil')->with('success', 'Berhasil ganti password✔');
+        if(Hash::check($request->old_password , auth()->user()->password)) {
+            if(!Hash::check($request->password, auth()->user()->password)) {
+                $user = auth()->user();
+                $user->update(['password' => Hash::make($request->password)]);
+                return redirect()->intended('/profil')->with('success', 'Berhasil ganti password✔');
+            } else {
+                return redirect()->back()->withErrors('Password tidak boleh sama dengan sebelumnya!');
+            }
+        } else {
+            return redirect()->back()->withErrors('Password lama salah!');
+        }
+
+
     }
+
+}
+
 }
