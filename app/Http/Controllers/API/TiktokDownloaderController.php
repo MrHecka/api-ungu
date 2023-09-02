@@ -18,7 +18,7 @@ class TiktokDownloaderController extends Controller
         $apikeyheaders = $request->header('apikey');
         $userApiKey = User::where('apikey', $apikeyheaders)->first();
         return response()->json([
-        'pesan'=>'gagal | id video tidak ditemukan | [GET] contoh request : /api/tiktok/?id=IDTIKTOK',
+        'pesan'=>'gagal | id video tidak ditemukan | [GET] contoh request : /api/tiktok?id=IDTIKTOK',
         'status'=>200,
         'nama_apikey'=>$userApiKey->nama], 200);
     }

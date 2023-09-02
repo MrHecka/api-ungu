@@ -16,7 +16,7 @@
     },
     {
         "methodReq" : "GET",
-        "title": "/api/cekresi/{ekspedisi}/?resi={noresi}",
+        "title": "/api/cekresi/{ekspedisi}?resi={noresi}",
         "docs": {
             "pesan": "sukses",
             "status": "200",
@@ -94,7 +94,7 @@
     },
     {
         "methodReq" : "GET",
-        "title": "/api/tiktok/?id={idtiktok}",
+        "title": "/api/tiktok?id={idtiktok}",
         "docs": {
             "pesan": "sukses",
             "status": 200,
@@ -159,7 +159,7 @@
     },
     {
         "methodReq" : "GET",
-        "title": "/api/film/cari/?q={namafilm}",
+        "title": "/api/film/cari?q={namafilm}",
         "docs": {
             "pesan": "sukses",
             "status": 200,
@@ -234,5 +234,24 @@
                 "string\"\r"
             ]
         }
+    },
+    {
+        "methodReq" : "GET",
+        "title": "/api/anime/streaminganime",
+        "docs": {
+            "pesan": "sukses",
+            "status": 200,
+            "nama_apikey": "Mr Bambang",
+            "source": "https://nimegami.id/",
+            "data": [
+                {
+                    "link": "string",
+                    "rating": "string",
+                    "total_eps": "string",
+                    "page": "int"
+                }
+            ]
+        }
     }
 ]
+

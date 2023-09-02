@@ -45,9 +45,7 @@
                     </div>
                 </form>
             </div>
-            
-
-            
+                        
           
                 <table class="min-w-full text-left text-sm font-light">
                     <thead class="border-b font-medium dark:border-neutral-500">
