@@ -18,7 +18,7 @@ class cariFilmController extends Controller
         $apikeyheaders = $request->header('apikey');
         $userApiKey = User::where('apikey', $apikeyheaders)->first();
         return response()->json([
-        'pesan'=>'Film Tidak Ditemukan | contoh request : [GET] /api/film/cari/?q=John+Wick','status'=>200,
+        'pesan'=>'Film Tidak Ditemukan | contoh request : [GET] /api/film/cari?q=John+Wick','status'=>200,
         'nama_apikey'=>$userApiKey->nama]
         , 200);
     }

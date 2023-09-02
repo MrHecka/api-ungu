@@ -7,7 +7,7 @@
 @section('isikonten')
 
 <div class="overflow-y-auto pt-16 flex flex-col h-screen w-full inline items-center text-md text-white text-left font-sans justify-center font-bold bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">
-<div class="text-white text-left">
+<div class="overflow-y-auto text-white text-left">
     <p class="text-2xl">API-UNGU DOCS</p>
 
     <div id="accordion-flush" data-accordion="collapse" data-active-classes="bgdark:bg-white-900 text-white-900 dark:text-white" data-inactive-classes="text-white-500 dark:text-white-400">
