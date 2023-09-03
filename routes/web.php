@@ -16,6 +16,8 @@ use App\Http\Controllers\pageController;
 |
 */
 
+
+
 Route::get('/', function () {
     return redirect('/auth');
 });

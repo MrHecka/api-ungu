@@ -7,6 +7,7 @@
     <meta name="description" value="API-UNGU | API UNTUK DEVELOPER">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <link rel="icon" type="image/x-icon" href="{{url('img/faviconHead.ico')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>API|UNGU</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
   </head>
