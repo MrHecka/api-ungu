@@ -16,6 +16,8 @@ use App\Http\Controllers\pageController;
 |
 */
 
+
+
 Route::get('/', function () {
     return redirect('/auth');
 });
@@ -41,6 +43,5 @@ Route::controller(pageController::class)->group(function () {
 
 // ADMIN CONTROLLER
 Route::middleware(['isUser', 'isDewa'])->group(function () {
-    // // Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::resource('/admin', AdminController::class);
 });
