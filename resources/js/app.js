@@ -1,8 +1,2 @@
-import "./bootstrap";
-import { Animate, initTE } from "tw-elements";
+import 'flowbite';
 
-initTE({ Animate });
-
-import { Modal, Ripple, initTE } from "tw-elements";
-
-// initTE({ Modal, Ripple });

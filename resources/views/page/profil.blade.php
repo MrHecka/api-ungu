@@ -6,8 +6,8 @@
 
 @section('isikonten')
 
-<div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">
-  <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+<div class="overflow-y-auto flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">
+  <div class="overflow-y-auto max-[1024px]:h-120 max-[1024px]:py-2 rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
     <div class="text-white">
       <div class="mb-8 flex flex-col items-center">
 
@@ -64,7 +64,7 @@
           <button type="submit" class="inline rounded-3xl bg-purple-400 bg-opacity-50 px-10 py-2 text-white-900 dark:text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-purple-600">Edit</button>
         </div>
         <div class="inline-flex pl-4 mt-8 text-lg text-white-900 font-bold">
-              <button type="submit" class="inline rounded-3xl bg-purple-400 bg-opacity-50 px-5 mr-10 py-2 items-right relative p-2 inline text-white-900 dark:text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-purple-600">
+              <button type="button" class="inline rounded-3xl bg-purple-400 bg-opacity-50 px-5 mr-10 py-2 items-right relative p-2 inline text-white-900 dark:text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-purple-600">
                 <a href="{{ route('profil.gantiPassword') }}">Ganti Password</a></button>
         </div>
 

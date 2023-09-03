@@ -4,23 +4,52 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use DOMDocument;
+use DOMXPath;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 
-class cariFilmController extends Controller
+class wikipediaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $apikeyheaders = $request->header('apikey');
-        $userApiKey = User::where('apikey', $apikeyheaders)->first();
-        return response()->json([
-        'pesan'=>'Film Tidak Ditemukan | contoh request : [GET] /api/film/cari?q=John+Wick','status'=>200,
-        'nama_apikey'=>$userApiKey->nama]
-        , 200);
+        try {
+            $apikeyheaders = $request->header('apikey');
+            $userApiKey = User::where('apikey', $apikeyheaders)->first();
+            $httpreq = new Client(['timeout' => 20]);
+            $reqapi = $httpreq->request('GET', 'https://id.wikipedia.org/wiki/Wikipedia:Tahukah_Anda');
+            $htmlString = (string) $reqapi->getBody();
+            libxml_use_internal_errors(true);
+            $doc = new DOMDocument();
+            $doc->loadHTML($htmlString);
+            $xpath = new DOMXPath($doc);
+            $getText = $xpath->evaluate('//div[@class="mw-parser-output"]//li');
+            $arrayText = [];
+            foreach ($getText as $texts) {
+                if (preg_match('/(?<=\... ).*/', $texts->textContent.PHP_EOL, $group)) {
+                    $arrayText[] = $group[0];
+                }
+            }
+
+            return response()->json([
+                'pesan'=>'sukses',
+                'status'=>200,
+                'source' => 'https://id.wikipedia.org/wiki/Wikipedia:Tahukah_Anda',
+                'nama_apikey'=>$userApiKey->nama,
+                'data'=>$arrayText]
+                , 200);
+        } catch (ClientException $err) {
+            return response()->json([
+                'pesan'=>'gagal',
+                'status'=>404,
+                'nama_apikey'=>$userApiKey->nama,
+                'error'=>'Something went wrong | '.$err->getResponse()->getBody().' | '.$err->getResponse()->getStatusCode()
+            ], 404);
+        }
     }
 
     /**
@@ -34,28 +63,9 @@ class cariFilmController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request)
+    public function show(string $id)
     {
-        try {
-            $apikeyheaders = $request->header('apikey');
-            $userApiKey = User::where('apikey', $apikeyheaders)->first();
-            $httpreq = new Client(['timeout' => 20]);
-            $getIDFilm = str_replace(" ", "+", $request->q);
-            $reqapi = $httpreq->request('GET', 'https://api.themoviedb.org/3/search/movie?query='.$getIDFilm.'&api_key='.env('APITMDB'));
-            return response()->json([
-                'pesan'=>'sukses',
-                'status'=>200,
-                'nama_apikey'=>$userApiKey->nama,
-                'linkgambar'=>'https://image.tmdb.org/t/p/w500/{idgambar}',
-                'data'=>json_decode($reqapi->getBody())], 200);
-        } catch(ClientException $err) {
-            return response()->json([
-                'pesan'=>'gagal',
-                'status'=>404,
-                'nama_apikey'=>$userApiKey->nama,
-                'error'=>'Something went wrong | '.$err->getResponse()->getBody().' | '.$err->getResponse()->getStatusCode()
-            ], 404);
-        }
+        //
     }
 
     /**

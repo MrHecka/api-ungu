@@ -18,7 +18,8 @@ class ApiMhsController extends Controller
         $apikeyheaders = $request->header('apikey');
         $userApiKey = User::where('apikey', $apikeyheaders)->first();
         return response()->json([
-            'pesan'=>'mahasiswa tidak ditemukan | contoh request : [GET] /api/carimahasiswa/budi','status'=>200,
+            'pesan'=>'mahasiswa tidak ditemukan | contoh request : [GET] /api/carimahasiswa/budi',
+            'status'=>200,
             'nama_apikey'=>$userApiKey->nama]
             , 200);
     }
@@ -39,7 +40,7 @@ class ApiMhsController extends Controller
         try {
             $apikeyheaders = $request->header('apikey');
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
-            $httpreq = new Client();
+            $httpreq = new Client(['timeout' => 20]);
             $reqapi = $httpreq->request('GET', 'https://api-frontend.kemdikbud.go.id/hit_mhs/'.$mhs);
             $arrayMHS = [];
             $dataMHS = json_decode($reqapi->getBody(), true);

@@ -18,7 +18,7 @@ class CekResiController extends Controller
         try {
             $apikeyheaders = $request->header('apikey');
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
-            $httpreq = new Client();
+            $httpreq = new Client(['timeout' => 20]);
             $reqapi = $httpreq->request('GET', 'https://api.binderbyte.com/v1/list_courier?api_key='.env('APIRESI'));
             return response()->json([
                 'pesan'=>'resi/layanan tidak ditemukan | [GET] contoh request : /api/cekresi/jne?&resi=142080117721233',
@@ -51,7 +51,7 @@ class CekResiController extends Controller
         try {
             $apikeyheaders = $request->header('apikey');
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
-            $httpreq = new Client();
+            $httpreq = new Client(['timeout' => 20]);
             $reqapi = $httpreq->request('GET', 'https://api.binderbyte.com/v1/track?api_key='.env('APIRESI').'&courier='.$service.'&awb='.$request->resi);
             return response()->json([
                 'pesan'=>'sukses',

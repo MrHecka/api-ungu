@@ -20,7 +20,7 @@ class cariAnimeController extends Controller
         $apikeyheaders = $request->header('apikey');
         $userApiKey = User::where('apikey', $apikeyheaders)->first();
         return response()->json([
-        'pesan'=>'Anime tidak ditemukan | contoh request : [POST] /api/anime/carianime, lalu upload image ke dalam form-data dengan key=image, atau juga bisa mengirimkan link gambar ke route [GET] /api/anime/carianime/?url=urlgambaranime','status'=>200,
+        'pesan'=>'Anime tidak ditemukan | contoh request : [POST] /api/anime/carianime, lalu upload image ke dalam form-data dengan key=image, atau juga bisa mengirimkan link gambar ke route [GET] /api/anime/carianime?url=urlgambaranime','status'=>200,
         'nama_apikey'=>$userApiKey->nama]
         , 200);
     }
@@ -49,7 +49,7 @@ class cariAnimeController extends Controller
             $base64 = base64_encode($source);
             $blob = 'data:'.$image->getMimeType().';base64,'.$base64;
 
-            $httpreq = new Client();
+            $httpreq = new Client(['timeout' => 20]);
             $uploadFile  = $httpreq->request('POST', 'https://api.trace.moe/search', 
                 [
                     'multipart' => [
@@ -82,12 +82,12 @@ class cariAnimeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request)
+    public function show(string $id, Request $request)
     {
         try {
             $apikeyheaders = $request->header('apikey');
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
-            $httpreq = new Client();
+            $httpreq = new Client(['timeout' => 20]);
             $reqapi = $httpreq->request('GET', 'https://api.trace.moe/search?url='.urlencode($request->url));
             return response()->json([
                 'pesan'=>'sukses',

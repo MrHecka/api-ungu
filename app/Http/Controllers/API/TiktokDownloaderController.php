@@ -18,7 +18,7 @@ class TiktokDownloaderController extends Controller
         $apikeyheaders = $request->header('apikey');
         $userApiKey = User::where('apikey', $apikeyheaders)->first();
         return response()->json([
-        'pesan'=>'gagal | id video tidak ditemukan | [GET] contoh request : /api/tiktok/?id=IDTIKTOK',
+        'pesan'=>'gagal | id video tidak ditemukan | [GET] contoh request : /api/tiktok?id=IDTIKTOK',
         'status'=>200,
         'nama_apikey'=>$userApiKey->nama], 200);
     }
@@ -39,7 +39,7 @@ class TiktokDownloaderController extends Controller
         try {
             $apikeyheaders = $request->header('apikey');
             $userApiKey = User::where('apikey', $apikeyheaders)->first();
-            $httpreq = new Client();
+            $httpreq = new Client(['timeout' => 20]);
             $reqapi = $httpreq->request('GET', 'https://api16-normal-c-useast1a.tiktokv.com/aweme/v1/feed/?aweme_id='.$request->id);
             $dataTiktok = json_decode($reqapi->getBody(), true);
             $validateID = $dataTiktok["aweme_list"][0]["aweme_id"]; 

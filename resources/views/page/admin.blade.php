@@ -5,45 +5,48 @@
 @extends('layout.app')
 
 @section('isikonten')
-<div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">
-    <div class="my-3 p-3 bg-body rounded shadow-sm">
-        <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
-            <div class="text-white">
-                <!-- FORM PENCARIAN -->
-                <div class="mb-3">
-                    <form action="{{ url('admin') }}" method="get" class="relative flex w-full">
-                        <div class="relative flex w-full">
-                            <input
-                                type="search"
-                                name="katakunci"
-                                value="{{ Request::get('katakunci') }}"
-                                aria-label="Search"
-                                class="relative block w-full min-w-0 flex-auto px-3 py-1.5 text-base font-normal text-white bg-transparent border border-solid border-neutral-300 rounded bg-clip-padding transition duration-200 ease-in-out outline-none focus:z-[3] focus:border-primary focus:text-white focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] dark:border-neutral-600 dark:text-neutral-200 dark:placeholder-text-neutral-200 dark:focus:border-primary"
-                                placeholder="Search"
-                            />
-                            <button
-                                type="submit"
-                                class="btn btn-secondary flex items-center px-3 py-1.5 rounded ml-2"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                    class="h-5 w-5"
-                                >
-                                    <path
-                                        fill-rule="evenodd"
-                                        d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
-                                        clip-rule="evenodd"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                {{-- AKHIR FORM PENCARIAN --}}
 
-                {{-- TABLE --}}
+<div class="overflow-y-auto overflow-x-auto flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">
+<div class="overflow-y-auto overflow-x-auto max-[1024px]:h-120 max-[1024px]:py-2 my-3 p-3 bg-body rounded shadow-sm">
+<div class="overflow-y-auto overflow-x-auto rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+<div class="text-white">
+    
+            <!-- FORM PENCARIAN -->
+            
+            <div class="mb-3">
+                <form action="{{ url('admin') }}" method="get" class="relative flex w-full">
+                    <div class="relative flex w-full">
+                        <input
+                            type="search"
+                            name="katakunci"
+                            value="{{ Request::get('katakunci') }}"
+                            aria-label="Search"
+                            class="relative block w-full min-w-0 flex-auto px-3 py-1.5 text-base font-normal text-white bg-transparent border border-solid border-neutral-300 rounded bg-clip-padding transition duration-200 ease-in-out outline-none focus:z-[3] focus:border-primary focus:text-white focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] dark:border-neutral-600 dark:text-neutral-200 dark:placeholder-text-neutral-200 dark:focus:border-primary"
+
+                            placeholder="Search"
+                        />
+                        <button
+                            type="submit"
+                            class="btn btn-secondary flex items-center px-3 py-1.5 rounded ml-2"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                class="h-5 w-5"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                                    clip-rule="evenodd"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+                        
+          
                 <table class="min-w-full text-left text-sm font-light">
                     <thead class="border-b font-medium dark:border-neutral-500">
                         <tr>

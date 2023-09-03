@@ -5,22 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 
 
-
-class pageController extends Controller implements Rule
+class pageController extends Controller
 {
+  
     public function dashboard()
     {
         $usernameAuth = Auth::user()->nama;
         return view('/page/dashboard')->with(['userName' => $usernameAuth]);
     }
 
+
     public function docs()
     {
-        return view('/page/dashboard');
+        $apiLists = json_decode(file_get_contents('jsonAPI/docs.json'), true);
+        return view('/page/docs')->with([
+            'apiLists'=>$apiLists
+        ]);
+    }
+
+    public function about()
+    {
+        return view('/page/about');
     }
 
     public function profil()
@@ -39,70 +47,49 @@ class pageController extends Controller implements Rule
         ]);
     }
 
-
-    // edit profil namalengkap, no hp, email, apikey
-    public function edit()
-    {
-        // Retrieve user data for editing
-        $user = auth()->user(); // Assuming you're using authentication
-
-        // Pass the user data to the view for rendering
-        return view('profile.edit', compact('user'));
-    }
-
     public function update(Request $request)
     {
         $user = Auth::user();
-        // Validate the input data
         $validatedData = $request->validate([
-            'nama' => 'required|string|max:255',
-            'nohp' => 'required|string|max:13|unique:users,nohp,' . $user->id,
+            'nama' => ['required','regex:/^[A-Za-z\s]*$/','string','max:255'],
+            'nohp' => ['required','regex:/^(\+62|62|0)8[1-9][0-9]{6,10}$/','string','min:9','max:14','unique:users,nohp,' . $user->id],
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'g-recaptcha-response' => 'required|captcha',
-            'apikey' => 'required|min:32|max:32|string|unique:users,apikey,' . $user->id
-            // Add more validation rules as needed
+            'apikey' => 'required|min:32|max:32|string|unique:users,apikey,' . $user->id,
+            'wlip'=> ['max:255','regex:/((25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)(,|,?$))/']
+
         ], [
-            'nama.required' => 'Nama nya diisi dulu oyy😡',
-            'nama.max' => 'Harap masukkan maximal 255😡',
-            'nohp.unique' => 'No. HP udah pernah terdaftar woyyy jan menuhin DB😡',
-            'nohp.max' => 'No hp maximal 13',
-            'email.required' => 'Email nya diisi dulu oyy😡',
-            'email.email' => 'Email tidak valid woyyyy😡',
+            'nama.required' => 'Nama nya diisi dulu oyy!',
+            'nama.regex'=>'Nama hanya boleh huruf!',
+            'nama.max' => 'Harap masukkan maximal 255!',
+            'nohp.unique' => 'No. HP udah pernah terdaftar woyyy jan menuhin DB!',
+            'nohp.min' => 'No HP minimal 10 angka!',
+            'nohp.max' => 'No HP maximal 13 angka!',
+            'nohp.regex' => 'Format No HP salah! [0878xxxxxxxx]',
+            'email.required' => 'Email nya diisi dulu oyy!',
+            'email.email' => 'Email tidak valid woyyyy!',
             'email.unique' => 'Email sudah pernah terdaftar',
             'email.max' => 'Harap masukkan maximal 255',
-            'g-recaptcha-response.required' => 'Isi captcha dulu woyy dasar bot😡',
+            'g-recaptcha-response.required' => 'Isi captcha dulu woyy dasar bot!',
             'apikey.min' => 'Harap masukkan minimamal 32',
             'apikey.max' => 'Harap masukkan maximal 32',
+            'wlip.regex' => 'Format IP salah!',
         ]);
 
 
-
-        // Update the user's profile data
         $user->update([
             'nama' => $request->nama,
             'nohp' => $request->nohp,
             'email' => $request->email,
             'apikey' => $request->apikey,
+            'wlip' => $request->wlip
         ]);
 
         // Redirect back with a success message
         return redirect()->route('profil')->with('success', 'Profil Berhasil Di Update!');
     }
 
-    public function passes($attribute, $value)
-    {
-        return Hash::check($value, auth()->user()->password);
-    }
 
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
-    public function message()
-    {
-        return 'The :attribute is match with old password.';
-    }
 
     public function gantiPassword()
     {
@@ -112,19 +99,33 @@ class pageController extends Controller implements Rule
     public function store(Request $request)
     {
         $request->validate([
-            'old_password' => ['required', new pageController],
+            'old_password' => ['required'],
             'password' => ['required'],
             'password_confirmation' => ['same:password'],
             'g-recaptcha-response' => 'required|captcha',
         ], [
-            'g-recaptcha-response.required' => 'Isi captcha dulu woyy dasar bot😡',
-            'old_password.required' => 'Harap isi password lama😡',
-            'password.required' => 'Harap isi password baru😡',
-            'password_confirmation.required' => 'Harap isi konfirmasi password😡'
+            'g-recaptcha-response.required' => 'Isi captcha dulu woyy dasar bot!',
+            'old_password.required' => 'Harap isi password lama!',
+            'password.required' => 'Harap isi password baru!',
+            'password.same' => 'Password baru tidak boleh sama dengan password lama!',
+            'password_confirmation.required' => 'Harap isi konfirmasi password!'
         ]);
-        $user = auth()->user();
-        $user->update(['password' => Hash::make($request->password)]);
 
-        return redirect()->intended('/profil')->with('success', 'Berhasil ganti password✔');
+        if(Hash::check($request->old_password , auth()->user()->password)) {
+            if(!Hash::check($request->password, auth()->user()->password)) {
+                $user = auth()->user();
+                $user->update(['password' => Hash::make($request->password)]);
+                return redirect()->intended('/profil')->with('success', 'Berhasil ganti password✔');
+            } else {
+                return redirect()->back()->withErrors('Password tidak boleh sama dengan sebelumnya!');
+            }
+        } else {
+            return redirect()->back()->withErrors('Password lama salah!');
+        }
+
+
     }
+
 }
+
+
