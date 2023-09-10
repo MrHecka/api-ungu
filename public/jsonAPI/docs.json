@@ -16,40 +16,61 @@
         }
     },
     {
-        "methodReq": "GET",
-        "title": "/api/cekresi/{ekspedisi}?resi={noresi}",
+        "methodReq" : "GET",
+        "title": "/api/v1/cekresi/{ekspedisi}?resi={noresi}",
         "docs": {
             "pesan": "sukses",
             "status": "200",
             "nama_apikey": "Mr Bambang",
             "data": {
-                "pesan": "sukses",
-                "status": 200,
-                "nama_apikey": "Mr Bambang",
-                "data": {
-                    "summary": {
-                        "awb": "string",
-                        "courier": "string",
-                        "service": "string",
-                        "status": "string",
+                "summary": {
+                    "awb": "string",
+                    "courier": "string",
+                    "service": "string",
+                    "status": "string",
+                    "date": "string",
+                    "desc": "string",
+                    "amount": "string",
+                    "weight": "string"
+                },
+                "detail": {
+                    "origin": "string",
+                    "destination": "string",
+                    "shipper": "string",
+                    "receiver": "string"
+                },
+                "history": [
+                    {
                         "date": "string",
                         "desc": "string",
-                        "amount": "string",
-                        "weight": "string"
-                    },
-                    "detail": {
-                        "origin": "string",
-                        "destination": "string",
-                        "shipper": "string",
-                        "receiver": "string"
-                    },
-                    "history": [
-                        {
-                            "date": "string",
-                            "desc": "string",
-                            "location": "string"
-                        }
-                    ]
+                        "location": "string"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "methodReq" : "GET",
+        "title": "/api/v2/cekresi/{ekspedisi}?resi={noresi}",
+        "docs": {
+            "pesan": "sukses",
+            "status": "200",
+            "nama_apikey": "Mr Bambang",
+            "data": {
+                "awb": "string",
+                "service": "string",
+                "estimate": "string",
+                "shipment_date": "string",
+                "summary": {
+                    "good_description": "string",
+                    "shipper_name": "string",
+                    "shipper_city": "string",
+                    "receiver_name": "string",
+                    "receiver_city": "string"
+                },
+                "history_details": {
+                    "date": "string",
+                    "history": "string"
                 }
             }
         }
