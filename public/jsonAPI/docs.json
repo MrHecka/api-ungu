@@ -1,6 +1,6 @@
 [
     {
-        "methodReq" : "GET",
+        "methodReq": "GET",
         "title": "/api/carimahasiswa/{id}",
         "docs": {
             "pesan": "sukses",
@@ -8,10 +8,11 @@
             "nama_apikey": "Mr Bambang",
             "source": "https://pddikti.kemdikbud.go.id",
             "data": [
-            {
-                "detailMHS": "string",
-                "linkMHS": "string"
-            }]
+                {
+                    "detailMHS": "string",
+                    "linkMHS": "string"
+                }
+            ]
         }
     },
     {
@@ -75,46 +76,46 @@
         }
     },
     {
-        "methodReq" : "GET",
+        "methodReq": "GET",
         "title": "/api/alquran/surah/{id}",
         "docs": {
-                "pesan": "sukses",
-                "status": 200,
-                "nama_apikey": "Mr Bambang",
-                "data": {
-                    "id": "int",
-                    "arti": "string",
-                    "asma": "string",
-                    "ayat": "string",
-                    "nama": "string",
-                    "type": "string",
-                    "urut": "string",
-                    "audio": "string",
-                    "nomor": "string",
-                    "rukuk": "string",
-                    "keterangan": "string"
-                }
+            "pesan": "sukses",
+            "status": 200,
+            "nama_apikey": "Mr Bambang",
+            "data": {
+                "id": "int",
+                "arti": "string",
+                "asma": "string",
+                "ayat": "string",
+                "nama": "string",
+                "type": "string",
+                "urut": "string",
+                "audio": "string",
+                "nomor": "string",
+                "rukuk": "string",
+                "keterangan": "string"
+            }
         }
     },
     {
-        "methodReq" : "GET",
+        "methodReq": "GET",
         "title": "/api/alquran/ayat/{id}",
         "docs": {
-                "pesan": "sukses",
-                "status": 200,
-                "nama_apikey": "Mr Bambang",
-                "data": [
-                    {
-                        "ar": "string",
-                        "id": "string",
-                        "tr": "string",
-                        "nomor": "string"
-                    }
-                ]
+            "pesan": "sukses",
+            "status": 200,
+            "nama_apikey": "Mr Bambang",
+            "data": [
+                {
+                    "ar": "string",
+                    "id": "string",
+                    "tr": "string",
+                    "nomor": "string"
+                }
+            ]
         }
     },
     {
-        "methodReq" : "GET",
+        "methodReq": "GET",
         "title": "/api/tiktok?id={idtiktok}",
         "docs": {
             "pesan": "sukses",
@@ -131,7 +132,7 @@
         }
     },
     {
-        "methodReq" : "GET",
+        "methodReq": "GET",
         "title": "/api/bmkg/gempaterbaru",
         "docs": {
             "pesan": "sukses",
@@ -160,7 +161,7 @@
         }
     },
     {
-        "methodReq" : "GET",
+        "methodReq": "GET",
         "title": "/api/freegames/epicgames",
         "docs": {
             "pesan": "sukses",
@@ -168,18 +169,18 @@
             "nama_apikey": "Mr Bambang",
             "source": "https://store.epicgames.com/en-US/free-games/",
             "data": [
-                    {
-                        "judul": "string",
-                        "deskripsi": "string",
-                        "status": "string",
-                        "gambar": "string",
-                        "link": "string"
-                    }
-                ]
-            }
+                {
+                    "judul": "string",
+                    "deskripsi": "string",
+                    "status": "string",
+                    "gambar": "string",
+                    "link": "string"
+                }
+            ]
+        }
     },
     {
-        "methodReq" : "GET",
+        "methodReq": "GET",
         "title": "/api/film/cari?q={namafilm}",
         "docs": {
             "pesan": "sukses",
@@ -192,11 +193,7 @@
                     {
                         "adult": "boolean",
                         "backdrop_path": "string",
-                        "genre_ids": [
-                            "int",
-                            "int",
-                            "int"
-                        ],
+                        "genre_ids": ["int", "int", "int"],
                         "id": "int",
                         "original_language": "string",
                         "original_title": "string",
@@ -216,7 +213,7 @@
         }
     },
     {
-        "methodReq" : "GET & POST",
+        "methodReq": "GET & POST",
         "title": "/api/anime/carianime",
         "docs": {
             "pesan": "sukses",
@@ -241,23 +238,18 @@
         }
     },
     {
-        "methodReq" : "GET",
+        "methodReq": "GET",
         "title": "/api/wikipedia/tahukahanda",
         "docs": {
             "pesan": "sukses",
             "status": 200,
             "source": "https://id.wikipedia.org/wiki/Wikipedia:Tahukah_Anda",
             "nama_apikey": "Mr Bambang",
-            "data": [
-                "string\"\r",
-                "string\"\r",
-                "string\"\r",
-                "string\"\r"
-            ]
+            "data": ["string\"\r", "string\"\r", "string\"\r", "string\"\r"]
         }
     },
     {
-        "methodReq" : "GET",
+        "methodReq": "GET",
         "title": "/api/anime/streaminganime",
         "docs": {
             "pesan": "sukses",
@@ -273,6 +265,58 @@
                 }
             ]
         }
+    },
+    {
+        "methodReq": "GET",
+        "title": "/api/jadwalsholat",
+        "docs": {
+            "pesan": "sukses",
+            "status": 200,
+            "nama_apikey": "adib",
+            "data": {
+                "status": true,
+                "data": {
+                    "id": "string",
+                    "lokasi": "string",
+                    "daerah": "string",
+                    "koordinat": {
+                        "lat": "float",
+                        "lon": "float",
+                        "lintang": "string",
+                        "bujur": "string"
+                    },
+                    "jadwal": {
+                        "tanggal": "string",
+                        "imsak": "string",
+                        "subuh": "string",
+                        "terbit": "string",
+                        "dhuha": "string",
+                        "dzuhur": "string",
+                        "ashar": "string",
+                        "maghrib": "string",
+                        "isya": "string",
+                        "date": "string"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "methodReq": "GET",
+        "title": "/api/gunungberapi",
+        "docs": {
+            "pesan": "sukses",
+            "status": 200,
+            "nama_apikey": "adib",
+            "data": [
+                {
+                    "nama": "string",
+                    "bentuk": "string",
+                    "tinggi_meter": "string",
+                    "estimasi_letusan_terakhir": "string",
+                    "geolokasi": "string"
+                }
+            ]
+        }
     }
 ]
-

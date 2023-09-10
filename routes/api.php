@@ -12,6 +12,8 @@ use App\Http\Controllers\API\freeEGController;
 use App\Http\Controllers\API\TiktokDownloaderController;
 use App\Http\Controllers\API\cariFilmController;
 use App\Http\Controllers\API\CekResi2Controller;
+use App\Http\Controllers\API\gunungberapiController;
+use App\Http\Controllers\API\jadwalSholatController;
 use App\Http\Controllers\API\streamingAnimeController;
 use App\Http\Controllers\API\wikipediaController;
 
@@ -31,8 +33,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // API MAHASISWA
-Route::get('carimahasiswa',[ApiMhsController::class, 'index'])->name('carimahasiswa.index');
-Route::get('carimahasiswa/{mhs}',[ApiMhsController::class, 'show'])->name('carimahasiswa.show');
+Route::get('carimahasiswa', [ApiMhsController::class, 'index'])->name('carimahasiswa.index');
+Route::get('carimahasiswa/{mhs}', [ApiMhsController::class, 'show'])->name('carimahasiswa.show');
 
 // API CEKRESI V1
 Route::get('v1/cekresi', [CekResiController::class, 'index'])->name('cekresi.index');
@@ -75,3 +77,9 @@ Route::get('/wikipedia/tahukahanda', [wikipediaController::class, 'index'])->nam
 Route::get('/anime/streaminganime', [streamingAnimeController::class, 'index'])->name('streaminganime.index');
 Route::get('/anime/streaminganime/', [streamingAnimeController::class, 'show'])->name('streaminganime.show');
 
+// JADWAL SHOLAT API
+Route::get('/jadwalsholat', [jadwalSholatController::class, 'index'])->name('jadwalsholat.index');
+Route::get('/jadwalsholat/{idkota}/{tahun}/{bulan}/{hari}', [jadwalSholatController::class, 'show'])->name('jadwalsholat.show');
+
+// GUNUNG BERAPI 
+Route::get('/gunungberapi', [gunungberapiController::class, 'index'])->name('gunungberapi.index');
