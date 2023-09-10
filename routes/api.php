@@ -11,6 +11,7 @@ use App\Http\Controllers\API\CekResiController;
 use App\Http\Controllers\API\freeEGController;
 use App\Http\Controllers\API\TiktokDownloaderController;
 use App\Http\Controllers\API\cariFilmController;
+use App\Http\Controllers\API\CekResi2Controller;
 use App\Http\Controllers\API\streamingAnimeController;
 use App\Http\Controllers\API\wikipediaController;
 
@@ -33,9 +34,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('carimahasiswa',[ApiMhsController::class, 'index'])->name('carimahasiswa.index');
 Route::get('carimahasiswa/{mhs}',[ApiMhsController::class, 'show'])->name('carimahasiswa.show');
 
-// API CEKRESI
-Route::get('cekresi', [CekResiController::class, 'index'])->name('cekresi.index');
-Route::get('cekresi/{service}', [CekResiController::class, 'show'])->name('cekresi.show');
+// API CEKRESI V1
+Route::get('v1/cekresi', [CekResiController::class, 'index'])->name('cekresi.index');
+Route::get('v1/cekresi/{service}', [CekResiController::class, 'show'])->name('cekresi.show');
+
+// API CEKRESI V2
+Route::get('v2/cekresi', [CekResi2Controller::class, 'index'])->name('cekresi2.index');
+Route::get('v2/cekresi/{service}', [CekResi2Controller::class, 'show'])->name('cekresi2.show');
+
 
 // API ALQURAN
 Route::get('alquran/surah', [AlquranSurahController::class, 'index'])->name('alquransurah.index');
