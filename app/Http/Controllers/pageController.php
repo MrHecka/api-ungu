@@ -28,7 +28,10 @@ class pageController extends Controller
 
     public function about()
     {
-        return view('/page/about');
+        $contributor = json_decode(file_get_contents('jsonAPI/contributor.json'), true);
+        return view('/page/about')->with([
+            'contributors'=>$contributor
+        ]);
     }
 
     public function profil()

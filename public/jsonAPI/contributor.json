@@ -1,0 +1,24 @@
+[
+    {
+        "image": "img/contributor/muhammad.webp",
+        "nama": "Muhammad",
+        "role": "Leader",
+        "desc": "Halo perkenalkan nama saya Muhammad👋 Role saya disini sebagai Leader atau yang memimpin dalam project website API Ungu ini, salam kenal semuanya😁🙌",
+        "instagram": "https://www.instagram.com/anone14_",
+        "github": "https://github.com/MrHecka",
+        "facebook": "#",
+        "linkedin": "https://www.linkedin.com/in/mrhecka",
+        "twitter": "https://twitter.com/TheeMitz"
+    },
+    {
+        "image": "#",
+        "nama": "Muhammad Adib Firmansyah",
+        "role": "Contributor",
+        "desc": "Halo perkenalkan nama saya Muhammad Adib Firmansyah👋 Role saya disini sebagai Contributor atau yang membantu website ini berkembang dalam segi apapun, salam kenal semuanya😁🙌",
+        "instagram": "#",
+        "github": "#",
+        "facebook": "#",
+        "linkedin": "#",
+        "twitter": "#"
+    }
+]

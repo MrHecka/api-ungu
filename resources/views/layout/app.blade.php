@@ -21,10 +21,10 @@
         <nav id="nav" class="fixed inset-x-0 top-0 flex flex-row justify-between z-10 text-white bg-transparent">
             <div class="p-4 inline">
               @if (Auth::check())
-                <img class="inline pb-2 w-12 h-12" src="{{url('img/faviconHead.ico')}}">
+                <img class="inline pb-2 w-12 h-16" src="{{url('img/headerTitle.webp')}}">
                 <div class="inline animate-in slide-in-from-top transform transition-all hover:scale-125 font-extrabold tracking-widest text-xl"><a href="/dashboard" class="transition duration-500 hover:text-indigo-500">API-UNGU</a></div>
               @else
-                <img class="inline pb-2 w-12 h-12" src="{{url('img/faviconHead.ico')}}">
+                <img class="inline pb-2 w-12 h-16" src="{{url('img/headerTitle.webp')}}">
                 <div class="inline animate-in slide-in-from-top transform transition-all hover:scale-125 font-extrabold tracking-widest text-xl"><a href="/" class="transition duration-500 hover:text-indigo-500">API-UNGU</a></div>
               @endif
             </div>
