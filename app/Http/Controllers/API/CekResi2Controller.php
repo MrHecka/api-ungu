@@ -19,13 +19,11 @@ class CekResi2Controller extends Controller
     {
         $apikeyheaders = $request->header('apikey');
         $userApiKey = User::where('apikey', $apikeyheaders)->first();
-        $httpreq = new Client(['timeout' => 20]);
-        $reqapi = $httpreq->request('GET', 'https://api.binderbyte.com/v1/list_courier?api_key='.env('APIRESI'));
         return response()->json([
             'pesan'=>'resi/layanan tidak ditemukan | [GET] contoh request : /api/v2/cekresi/jne?&resi=142080117721233',
             'status'=>200,
             'nama_apikey'=>$userApiKey->nama,
-            'listkurir'=>['jne','sicepat']], 200);
+            'listkurir'=>['jne','sicepat','spx']], 200);
     }
 
     /**
@@ -200,6 +198,75 @@ class CekResi2Controller extends Controller
             }
 
         // NOT FOUND EKSPEDISI/SERVICE
+        } else if(strtolower($service) === "spx") {
+            try {
+                // ENCODED KEY CEK RESI SPX
+                function encodedKey($resi): string
+                {
+                    $key  = "0ebfffe63d2a481cf57fe7d5ebdc9fd6";
+                    $data = [
+                        'key'  => base64_encode($key),
+                        'time' => time()
+                    ];
+
+                    $parameter = $resi . "|" . $data['time'] . hash('sha256', ($resi . $data['time'] . $data['key']));
+
+                    return $parameter;
+
+                }
+
+                // TRACK SPX/SHOPEE EXPRESS
+                function shopeeWaybillTrack($waybill): array
+                {
+                    $waybill  = strtoupper($waybill);
+                    $headerSPX = array(
+                        "Authority: spx.co.id",
+                        "Sec-Ch-Ua: \" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"91\", \"Chromium\";v=\"91\"",
+                        "Accept: application/json, text/plain, */*",
+                        "Sec-Ch-Ua-Mobile: ?0",
+                        "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36",
+                        "Sec-Fetch-Site: same-origin",
+                        "Sec-Fetch-Mode: cors",
+                        "Sec-Fetch-Dest: empty",
+                        "Referer: https://spx.co.id/detail/$waybill",
+                        "Accept-Language: id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7",
+                        "Cookie: _ga=GA1.3.1846728554.1660367856; _gid=GA1.3.864556559.1660367856; fms_language=id; _gat_UA-61904553-17=1",
+                    );
+
+                    $httpreq = new Client(['timeout' => 20, 'cookies' => true]);
+                    $reqSPX = $httpreq->request('GET', 'https://spx.co.id/api/v2/fleet_order/tracking/search?sls_tracking_number=' . encodedKey(resi : $waybill), ['headers' => $headerSPX]);
+
+                    return json_decode($reqSPX->getBody(), true);
+
+                }
+
+                if(strpos(shopeeWaybillTrack($request->resi)['message'], 'error')) {
+                    return response()->json([
+                        'pesan'=>'gagal',
+                        'status'=>404,
+                        'nama_apikey'=>$userApiKey->nama,
+                        'error'=>'Resi tidak ditemukan :('
+                    ], 404);
+                }
+
+                // RESPONSE SUKSES GAN :V
+                return response()->json([
+                    'pesan'=>'sukses',
+                    'status'=>200,
+                    'nama_apikey'=>$userApiKey->nama,
+                    'data'=>shopeeWaybillTrack($request->resi)['data'],
+                ], 200);
+
+            } catch(ClientException $err) {
+
+                return response()->json([
+                    'pesan'=>'gagal',
+                    'status'=>404,
+                    'nama_apikey'=>$userApiKey->nama,
+                    'error'=>'Something went wrong | '.$err->getResponse()->getBody().' | '.$err->getResponse()->getStatusCode()
+                ], 404);
+            }
+        
         } else {
             return response()->json([
                 'pesan'=>'gagal',

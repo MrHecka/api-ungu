@@ -39,12 +39,7 @@ class AdminController extends Controller
 
     public function show(string $id)
     {
-        $userData = User::find($id);
 
-        if (!$userData) {
-            return response()->json(['message' => 'Pengguna tidak ditemukan'], 404);
-        }
-        return response()->json($userData);
     }
 
 
@@ -78,8 +73,6 @@ class AdminController extends Controller
 
         User::where('id', $request->userId)->update($data);
 
-        // Mengembalikan respons JSON sebagai confermaasi pembaruan berhasil
-        // return response()->json(['message' => 'Data berhasil diperbarui']);
         return redirect()->to('/admin')->with('success', 'Berhasil update user');
     }
 
