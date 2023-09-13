@@ -52,8 +52,10 @@
                         <tr>
                             <th scope="col" class="px-6 py-4">No</th>
                             <th scope="col" class="px-6 py-4">Nama Lenkap</th>
-                            <th scope="col" class="px-6 py-4">No hp</th>
+                            <th scope="col" class="px-6 py-4">No. HP</th>
                             <th scope="col" class="px-6 py-4">Email</th>
+                            <th scope="col" class="px-6 py-4">Role</th>
+                            <th scope="col" class="px-6 py-4">Verifikasi Email</th>
                             <th scope="col" class="px-6 py-4">Action</th>
                         </tr>
                     </thead>
@@ -65,6 +67,8 @@
                             <td class="whitespace-nowrap px-6 py-4">{{ $item->nama }}</td>
                             <td class="whitespace-nowrap px-6 py-4">{{ $item->nohp }}</td>
                             <td class="whitespace-nowrap px-6 py-4">{{ $item->email }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ $item->is_dewa ? 'Admin':'User' }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ $item->email_verified_at ? 'Terverifikasi':'Belum Verifikasi' }}</td>
                             <td class="whitespace-nowrap px-6 py-4">
                                 <a href='#' data-target="{{ $item->id }}" class="openModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 d-flex inline">
@@ -72,7 +76,7 @@
                                     </svg>
                                 </a>
 
-                                <form onsubmit="return confirm('yakin mau delete?')" class="d-flex inline" action="{{ url('admin/'.$item->id) }}" method="post">
+                                <form onsubmit="return confirm('Apakah anda yakin menghapus user ini?')" class="d-flex inline" action="{{ url('admin/'.$item->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" name="submit">
@@ -117,7 +121,7 @@
                                         
                                         <div class="mb-4">
                                             <label for="nama" class="block pl-32 text-center items-center justify-center text-white text-sm font-bold mb-2">Nama User :</label>
-                                            <input class="rounded-3xl border-none text-white bg-purple-400 bg-opacity-50 items-center px-32 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50" id="nama" name="nama" value="" type="text" placeholder="Nama">
+                                            <input type="text" value="" class="rounded-3xl border-none text-white bg-purple-400 bg-opacity-50 items-center px-32 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50" id="nama" name="nama" placeholder="Nama">
                                         </div>
                                         
                                         <div class="mb-4">
@@ -130,6 +134,21 @@
                                             <input class="rounded-3xl border-none text-white bg-purple-400 bg-opacity-50 items-center px-32 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50" id="email" name="email" value="" type="email" placeholder="Email">
                                         </div>
                                         
+                                        <div class="mb-4 place-self-center place-self-center place-items-center content-center place-items-center text-center font-bold">
+                                            <label for="roles" class="block pl-32 text-center items-center justify-center text-white text-sm font-bold mb-2">Verifikasi Email :</label>
+                                            <select class="place-self-center ml-32 text-center items-center rounded-3xl place-items-center border-none justify-center text-white bg-purple-400 bg-opacity-50 items-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50" id="verifyEmail" name="verifyEmail">
+                                                <option value="" selected>Belum Verifikasi</option>
+                                                <option value={{ date("Y-m-d H:i:s"); }}>Sudah Verifikasi</option>
+                                              </select>
+                                        </div>
+
+                                        <div class="mb-4 place-self-center place-self-center place-items-center content-center place-items-center text-center font-bold">
+                                            <label for="roles" class="block pl-32 text-center items-center justify-center text-white text-sm font-bold mb-2">Role User :</label>
+                                            <select class="place-self-center ml-32 text-center items-center rounded-3xl place-items-center border-none justify-center text-white bg-purple-400 bg-opacity-50 items-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50" id="roles" name="roles">
+                                                <option value=0 selected>User</option>
+                                                <option value=1>Admin</option>
+                                              </select>
+                                        </div>
                                         
                                         <button type="submit" id="updateButton" class="flex inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
                                             Update
@@ -159,7 +178,6 @@
             var userId = $(this).data('target');
             $('#userId').val(userId);
 
-            // Mengambil data pengguna berdasarkan userId dari API atau sumber data lainnya
             $.ajax({
                 url: '/admin/' + userId, 
                 method: 'GET',
@@ -169,15 +187,9 @@
                     $('#email').val(data.email);
                     $('#interestModal').removeClass('invisible');
 
-                    // console.log('Mengirim data ke server:');
-                    // console.log('User ID:', userId);
-                    // console.log('Nama:', data.nama);
-                    // console.log('No HP:', data.nohp);
-                    // console.log('Email:', data.email);
                 },
                 error: function (xhr, status, error) {
                     console.error('Terjadi kesalahan:', error);
-                    // Tambahkan penanganan kesalahan di sini (misalnya, menampilkan pesan kesalahan kepada pengguna).
                 }
             });
         });

@@ -69,6 +69,8 @@ class AdminController extends Controller
             'nama' => $request->nama,
             'nohp' => $request->nohp,
             'email' => $request->email,
+            'is_dewa'=> $request->roles,
+            'email_verified_at'=> $request->verifyEmail,
         ];
 
         User::where('id', $request->userId)->update($data);
@@ -84,8 +86,4 @@ class AdminController extends Controller
         return redirect()->to('/admin')->with('success', 'Berhasil delete user');
     }
 
-    public function modal()
-    {
-        return view('tailwind-modal');
-    }
 }

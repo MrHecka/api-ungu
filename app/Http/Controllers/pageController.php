@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Hash;
 
 class pageController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+    }
   
     public function dashboard()
     {
@@ -62,18 +67,18 @@ class pageController extends Controller
             'wlip'=> ['max:255','regex:/((25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)(,|,?$))/']
 
         ], [
-            'nama.required' => 'Nama nya diisi dulu oyy!',
+            'nama.required' => 'Harap isi nama terlebih dahulu!',
             'nama.regex'=>'Nama hanya boleh huruf!',
             'nama.max' => 'Harap masukkan maximal 255!',
-            'nohp.unique' => 'No. HP udah pernah terdaftar woyyy jan menuhin DB!',
+            'nohp.unique' => 'Mohon maaf No.HP telah terdaftar sebelumnya!',
             'nohp.min' => 'No HP minimal 10 angka!',
             'nohp.max' => 'No HP maximal 13 angka!',
             'nohp.regex' => 'Format No HP salah! [0878xxxxxxxx]',
-            'email.required' => 'Email nya diisi dulu oyy!',
-            'email.email' => 'Email tidak valid woyyyy!',
-            'email.unique' => 'Email sudah pernah terdaftar',
+            'email.required' => 'Harap mengisi email terlebih dahulu!',
+            'email.email' => 'Email tidak valid!!',
+            'email.unique' => 'Email sudah pernah terdaftar!',
             'email.max' => 'Harap masukkan maximal 255',
-            'g-recaptcha-response.required' => 'Isi captcha dulu woyy dasar bot!',
+            'g-recaptcha-response.required' => 'Mohon untuk menyelesaikan captcha terlebih dahulu!',
             'apikey.min' => 'Harap masukkan minimamal 32',
             'apikey.max' => 'Harap masukkan maximal 32',
             'wlip.regex' => 'Format IP salah!',
@@ -107,7 +112,7 @@ class pageController extends Controller
             'password_confirmation' => ['same:password'],
             'g-recaptcha-response' => 'required|captcha',
         ], [
-            'g-recaptcha-response.required' => 'Isi captcha dulu woyy dasar bot!',
+            'g-recaptcha-response.required' => 'Mohon untuk menyelesaikan captcha terlebih dahulu!',
             'old_password.required' => 'Harap isi password lama!',
             'password.required' => 'Harap isi password baru!',
             'password.same' => 'Password baru tidak boleh sama dengan password lama!',

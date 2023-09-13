@@ -27,9 +27,9 @@ class AuthController extends Controller
             'password' => 'required',
             'g-recaptcha-response' => 'required|captcha'
         ],[
-            'email.required'=>'Email nya diisi dulu oyy',
-            'password.required'=>'Password nya diisi dulu oyy',
-            'g-recaptcha-response.required'=>'Isi captcha dulu woyy dasar bot'
+            'email.required'=>'Harap isi Email terlebih dahulu!',
+            'password.required'=>'Harap isi Password terlebih dahulu!',
+            'g-recaptcha-response.required'=>'Harap mengisi captcha terlebih dahulu ^_^'
         ]);
 
         $dataLogin = [
@@ -58,28 +58,33 @@ class AuthController extends Controller
 
         $request->validate([
             'nama'=>['required','regex:/^[A-Za-z\s]*$/','string','max:255'],
-            'email'=>'required|email|unique:users|max:255',
+            'email'=>['required','regex:/(gmail|googlemail).com/','email','unique:users','max:255'],
             'nohp'=> ['required','regex:/^(\+62|62|0)8[1-9][0-9]{6,10}$/','string','min:9','max:14','unique:users'],
             'password'=> 'required|min:6|max:32',
             'g-recaptcha-response' => 'required|captcha'
         ],[
-            'nama.required'=>'Nama nya diisi dulu oyy',
+            'nama.required'=>'Harap isi nama terlebih dahulu!',
             'nama.max'=>'Nama Terlalu Panjang.',
             'nama.regex'=>'Nama Harus Huruf.',
-            'email.required'=>'Email nya diisi dulu oyy',
-            'email.email'=>'Email tidak valid woyyyy',
-            'email.max'=>'Email Terlalu Panjang.',
-            'email.unique'=>'Email udah pernah terdaftar woyyy jan menuhin DB',
-            'nohp.required'=>'No. HP nya diisi dulu oyy',
-            'nohp.unique'=>'No. HP udah pernah terdaftar woyyy jan menuhin DB',
+            'email.required'=>'Harap isi email terlebih dahulu!',
+            'email.email'=>'Email tidak valid :(',
+            'email.max'=>'Email Terlalu Panjang :(',
+            'email.unique'=>'Email udah pernah terdaftar :(',
+            'email.regex'=>'Mohon maaf saat ini user hanya boleh menggunakan domain @gmail.com saja!',
+            'nohp.required'=>'Harap isi No.HP terlebih dahulu :)',
+            'nohp.unique'=>'No.HP sudah pernah terdaftar sebelumnya!',
             'nohp.min'=>'No. HP tidak valid! [Minimal 10 Angka]',
             'nohp.regex'=>'No. HP tidak valid! [Contoh : 0878xxxxxxxx [Min 10 Angka, Max 13 Angka]',
             'nohp.numeric'=>'No. HP harus angka!',
-            'password.required'=>'Password nya diisi dulu oyy',
-            'password.min'=>'Minimum password 6 karakter ngabb',
+            'password.required'=>'Harap untuk mengisi password terlebih dahulu!',
+            'password.min'=>'Minimum password 6 karakter!',
             'password.max'=>'Password terlalu panjang [MAX : 32]',
-            'g-recaptcha-response.required'=>'Isi captcha dulu woyy dasar bot'
+            'g-recaptcha-response.required'=>'Harap selesaikan captcha terlebih dahulu!'
         ]);
+
+        if(preg_match('/[.+](?=[^\s@]*@gmail\.com)/', $request->email)) {
+            return redirect('auth/register')->withErrors('Mohon maaf email yang anda masukkan tidak valid :( [dot trick prevent]');
+        }
 
         $dataRegister = [
             'nama' => $request->nama,
@@ -107,7 +112,8 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Auth::logout();
+        auth()->logout();
+        Session()->flush();
         return redirect('/auth')->with('success', 'Berhasil Logout✔');
     }
 }

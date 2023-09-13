@@ -10,9 +10,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Str;
 use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Uuid;
     use HasApiTokens, HasFactory, Notifiable;
@@ -41,7 +41,6 @@ class User extends Authenticatable
         'email',
         'nohp',
         'password',
-        'is_dewa',
         'tgl_pembuatan',
         'apikey',
         'wlip'
@@ -65,6 +64,7 @@ class User extends Authenticatable
     protected $casts = [
         'tgl_pembuatan' => 'datetime',
         'password' => 'hashed',
+        'email_verified_at' => 'datetime',
     ];
 
 }

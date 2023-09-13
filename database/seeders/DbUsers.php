@@ -26,6 +26,7 @@ class DbUsers extends Seeder
             'email'=>'nyenye@gmail.com',
             'nohp'=>'087829190342',
             'password'=>Hash::Make('nyenye'),
+            'email_verified_at'=>'2023-09-13 08:17:50',
             'is_dewa'=>1,
             'tgl_pembuatan'=>Carbon::now(),
             'apikey'=>Str::random(32),
