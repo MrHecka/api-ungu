@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\pageController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +17,14 @@ use App\Http\Controllers\pageController;
 |
 */
 
+// MUST VERIFY EMAIL
+Auth::routes(['verify'=>true]);
 
-
+// GO TO DEFAULT PAGE
 Route::get('/', function () {
     return redirect('/auth');
 });
+
 
 // AUTH ROUTER CONTROLLER
 Route::controller(AuthController::class)->group(function () {
@@ -33,13 +37,13 @@ Route::controller(AuthController::class)->group(function () {
 
 // PAGE CONTROLLER
 Route::controller(pageController::class)->group(function () {
-    Route::get('/dashboard', 'dashboard')->middleware('isUser')->name('dashboard');
-    Route::get('/docs', 'docs')->middleware('isUser')->name('docs');
-    Route::get('/about', 'about')->middleware('isUser')->name('about');
-    Route::get('/profil', 'profil')->middleware('isUser')->name('profil');
-    Route::post('/profil/update', 'update')->middleware('isUser')->name('profil.update');
-    Route::get('/profil/gantiPassword', 'gantiPassword')->middleware('isUser')->name('profil.gantiPassword');
-    Route::post('/profil/updatePassword', 'store')->middleware('isUser')->name('profil.updatePassword');
+    Route::get('/dashboard', 'dashboard')->middleware(['isUser', 'verified'])->name('dashboard');
+    Route::get('/docs', 'docs')->middleware(['isUser', 'verified'])->name('docs');
+    Route::get('/about', 'about')->middleware(['isUser', 'verified'])->name('about');
+    Route::get('/profil', 'profil')->middleware(['isUser', 'verified'])->name('profil');
+    Route::post('/profil/update', 'update')->middleware(['isUser', 'verified'])->name('profil.update');
+    Route::get('/profil/gantiPassword', 'gantiPassword')->middleware(['isUser', 'verified'])->name('profil.gantiPassword');
+    Route::post('/profil/updatePassword', 'store')->middleware(['isUser', 'verified'])->name('profil.updatePassword');
 });
 
 // ADMIN CONTROLLER

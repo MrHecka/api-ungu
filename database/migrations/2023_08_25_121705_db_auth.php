@@ -17,12 +17,13 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('nohp')->unique();
             $table->string('password');
+            $table->datetime('email_verified_at')->nullable();
             $table->boolean('is_dewa')->default(0);
             $table->string('tgl_pembuatan');
             $table->string('apikey')->unique();
-            $table->string('wlip')->default('');
-
+            $table->string('wlip')->nullable();
             $table->primary('id');
+            $table->integer('last_activity')->index();
         });
     }
 

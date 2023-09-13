@@ -12,6 +12,7 @@ class AdminController extends Controller
 
     public function index(Request $request)
     {
+        $total_logins = User::where('last_activity','>',now()->subMinutes(5)->getTimestamp())->get();
         $katakunci = $request->katakunci;
         $jumlahbaris = 5;
         if (strlen($katakunci)) {
@@ -21,7 +22,10 @@ class AdminController extends Controller
 
             $data = User::orderBy('nama', 'desc')->paginate($jumlahbaris);
         }
-        return view('page.admin')->with('data', $data);
+        return view('page.admin')->with([
+            'data' => $data,
+            'logs_login' => $total_logins
+        ]);
     }
 
 
@@ -69,6 +73,8 @@ class AdminController extends Controller
             'nama' => $request->nama,
             'nohp' => $request->nohp,
             'email' => $request->email,
+            'is_dewa'=> $request->roles,
+            'email_verified_at'=> $request->verifyEmail,
         ];
 
         User::where('id', $request->userId)->update($data);
@@ -84,8 +90,4 @@ class AdminController extends Controller
         return redirect()->to('/admin')->with('success', 'Berhasil delete user');
     }
 
-    public function modal()
-    {
-        return view('tailwind-modal');
-    }
 }
