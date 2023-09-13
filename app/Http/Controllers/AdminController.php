@@ -12,6 +12,7 @@ class AdminController extends Controller
 
     public function index(Request $request)
     {
+        $total_logins = User::where('last_activity','>',now()->subMinutes(5)->getTimestamp())->get();
         $katakunci = $request->katakunci;
         $jumlahbaris = 5;
         if (strlen($katakunci)) {
@@ -21,7 +22,10 @@ class AdminController extends Controller
 
             $data = User::orderBy('nama', 'desc')->paginate($jumlahbaris);
         }
-        return view('page.admin')->with('data', $data);
+        return view('page.admin')->with([
+            'data' => $data,
+            'logs_login' => $total_logins
+        ]);
     }
 
 

@@ -31,6 +31,7 @@ class DbUsers extends Seeder
             'tgl_pembuatan'=>Carbon::now(),
             'apikey'=>Str::random(32),
             'wlip'=>'202.80.212.176,127.0.0.1',
+            'last_activity' => now()->getTimestamp(),
         ]);
     }
 }

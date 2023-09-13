@@ -17,6 +17,9 @@ class isUser
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::check()) {
+            Auth::user()->timestamps = false;
+            Auth::user()->last_activity = now()->getTimestamp();
+            Auth::user()->saveQuietly();
             return $next($request);
         }
         return redirect('/')->withErrors('Login Dulu Woyyy😡');

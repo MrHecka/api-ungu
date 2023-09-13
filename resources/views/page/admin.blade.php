@@ -56,6 +56,7 @@
                             <th scope="col" class="px-6 py-4">Email</th>
                             <th scope="col" class="px-6 py-4">Role</th>
                             <th scope="col" class="px-6 py-4">Verifikasi Email</th>
+                            <th scope="col" class="px-6 py-4">Status</th>
                             <th scope="col" class="px-6 py-4">Action</th>
                         </tr>
                     </thead>
@@ -69,6 +70,7 @@
                             <td class="whitespace-nowrap px-6 py-4">{{ $item->email }}</td>
                             <td class="whitespace-nowrap px-6 py-4">{{ $item->is_dewa ? 'Admin':'User' }}</td>
                             <td class="whitespace-nowrap px-6 py-4">{{ $item->email_verified_at ? 'Terverifikasi':'Belum Verifikasi' }}</td>
+                            <td class="whitespace-nowrap px-6 py-4">{{ in_array($item->id,array_column(json_decode($logs_login), 'id')) ? 'Online':'Offline' }}</td>
                             <td class="whitespace-nowrap px-6 py-4">
                                 <a href='#' data-target="{{ $item->id }}" class="openModal">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 d-flex inline">
@@ -94,6 +96,7 @@
                     </tbody>
                 </table>
                 {{ $data->withQueryString()->links('pagination::tailwind') }}
+                <br><p class="font-bold">Online Users [5 Menit Terakhir] : {{ count($logs_login) }}</p>
             </div>
         </div>
     </div>

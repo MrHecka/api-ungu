@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('apikey')->unique();
             $table->string('wlip')->nullable();
             $table->primary('id');
+            $table->integer('last_activity')->index();
         });
     }
 

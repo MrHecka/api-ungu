@@ -93,6 +93,7 @@ class AuthController extends Controller
             'password' => Hash::Make($request->password),
             'tgl_pembuatan' => Carbon::now(),
             'apikey' => Str::random(32),
+            'last_activity' => now()->getTimestamp(),
         ];
 
         User::create($dataRegister);

@@ -43,7 +43,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'tgl_pembuatan',
         'apikey',
-        'wlip'
+        'wlip',
+        'last_activity'
     ];
 
     /**
