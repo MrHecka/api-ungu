@@ -45,13 +45,14 @@ class pageController extends Controller
         $nohp = Auth::user()->nohp;
         $email = Auth::user()->email;
         $apikey = Auth::user()->apikey;
+        $wlip = Auth::user()->wlip;
 
         return view('/page/profil')->with([
             'nama' => $nama,
             'nohp' => $nohp,
             'email' => $email,
-            'apikey' => $apikey
-
+            'apikey' => $apikey,
+            'wlip' => $wlip
         ]);
     }
 
@@ -59,9 +60,9 @@ class pageController extends Controller
     {
         $user = Auth::user();
         $validatedData = $request->validate([
-            'nama' => ['required','regex:/^[A-Za-z\s]*$/','string','max:255'],
+            'nama' => ['required','regex:/^[A-Za-z\s]*$/','string','max:100'],
             'nohp' => ['required','regex:/^(\+62|62|0)8[1-9][0-9]{6,10}$/','string','min:9','max:14','unique:users,nohp,' . $user->id],
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'email' => 'required|string|email|max:100|unique:users,email,' . $user->id,
             'g-recaptcha-response' => 'required|captcha',
             'apikey' => 'required|min:32|max:32|string|unique:users,apikey,' . $user->id,
             'wlip'=> ['max:255','regex:/((25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)(,|,?$))/']
@@ -69,7 +70,7 @@ class pageController extends Controller
         ], [
             'nama.required' => 'Harap isi nama terlebih dahulu!',
             'nama.regex'=>'Nama hanya boleh huruf!',
-            'nama.max' => 'Harap masukkan maximal 255!',
+            'nama.max' => 'Harap masukkan maximal 100 karakter!',
             'nohp.unique' => 'Mohon maaf No.HP telah terdaftar sebelumnya!',
             'nohp.min' => 'No HP minimal 10 angka!',
             'nohp.max' => 'No HP maximal 13 angka!',
@@ -77,11 +78,12 @@ class pageController extends Controller
             'email.required' => 'Harap mengisi email terlebih dahulu!',
             'email.email' => 'Email tidak valid!!',
             'email.unique' => 'Email sudah pernah terdaftar!',
-            'email.max' => 'Harap masukkan maximal 255',
+            'email.max' => 'Harap masukkan maximal 100 karakter',
             'g-recaptcha-response.required' => 'Mohon untuk menyelesaikan captcha terlebih dahulu!',
             'apikey.min' => 'Harap masukkan minimamal 32',
             'apikey.max' => 'Harap masukkan maximal 32',
             'wlip.regex' => 'Format IP salah!',
+            'wlip.max' => 'IP terlalu banyak, max 255 karakter!'
         ]);
 
 

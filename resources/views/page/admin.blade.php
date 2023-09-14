@@ -140,7 +140,7 @@
                                         <div class="mb-4 place-self-center place-self-center place-items-center content-center place-items-center text-center font-bold">
                                             <label for="roles" class="block pl-32 text-center items-center justify-center text-white text-sm font-bold mb-2">Verifikasi Email :</label>
                                             <select class="place-self-center ml-32 text-center items-center rounded-3xl place-items-center border-none justify-center text-white bg-purple-400 bg-opacity-50 items-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50" id="verifyEmail" name="verifyEmail">
-                                                <option value="" selected>Belum Verifikasi</option>
+                                                <option value="">Belum Verifikasi</option>
                                                 <option value={{ date("Y-m-d H:i:s"); }}>Sudah Verifikasi</option>
                                               </select>
                                         </div>
@@ -148,7 +148,7 @@
                                         <div class="mb-4 place-self-center place-self-center place-items-center content-center place-items-center text-center font-bold">
                                             <label for="roles" class="block pl-32 text-center items-center justify-center text-white text-sm font-bold mb-2">Role User :</label>
                                             <select class="place-self-center ml-32 text-center items-center rounded-3xl place-items-center border-none justify-center text-white bg-purple-400 bg-opacity-50 items-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50" id="roles" name="roles">
-                                                <option value=0 selected>User</option>
+                                                <option value=0>User</option>
                                                 <option value=1>Admin</option>
                                               </select>
                                         </div>
@@ -184,15 +184,16 @@
             $.ajax({
                 url: '/admin/' + userId, 
                 method: 'GET',
-                success: function (data) {
-                    $('#nama').val(data.nama);
-                    $('#nohp').val(data.nohp);
-                    $('#email').val(data.email);
+                success: function (response) {
+                    $('#nama').val(response.UserDetails.nama);
+                    $('#nohp').val(response.UserDetails.nohp);
+                    $('#email').val(response.UserDetails.email);
+                    $('#roles').val(response.UserDetails.is_dewa).attr('selected','selected');
                     $('#interestModal').removeClass('invisible');
 
                 },
                 error: function (xhr, status, error) {
-                    console.error('Terjadi kesalahan:', error);
+
                 }
             });
         });

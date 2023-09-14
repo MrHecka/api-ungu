@@ -17,7 +17,7 @@ class isGuest
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::check()) {
-            return redirect('/dashboard')->withErrors('Kamu Sudah Login, Silahkan Logout Terlebih Dahulu😡');
+            return redirect('/dashboard')->withErrors('Kamu Sudah Login, Silahkan Logout Terlebih Dahulu!');
         }
         return $next($request);
     }

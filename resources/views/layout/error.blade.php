@@ -17,7 +17,7 @@
               </div>
               <div class="mt-3 text-center sm:mt-5">
                   <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                      ERROR WOYY😡
+                      >> TERJADI ERROR << 
                   </h3>
                   <div class="mt-2">
                     @foreach ($errors->all() as $error)

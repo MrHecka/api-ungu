@@ -22,10 +22,10 @@ class DbUsers extends Seeder
 
         DB::table('users')->insert([
             'id' => Str::uuid(),
-            'nama'=>'Nyenye',
-            'email'=>'nyenye@gmail.com',
-            'nohp'=>'087829190342',
-            'password'=>Hash::Make('nyenye'),
+            'nama'=>'API Ungu',
+            'email'=>'apiunguverify@gmail.com',
+            'nohp'=>'081809140503',
+            'password'=>Hash::Make('Heckayo141414'),
             'email_verified_at'=>'2023-09-13 08:17:50',
             'is_dewa'=>1,
             'tgl_pembuatan'=>Carbon::now(),
@@ -35,3 +35,4 @@ class DbUsers extends Seeder
         ]);
     }
 }
+

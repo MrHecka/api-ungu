@@ -57,8 +57,8 @@ class AuthController extends Controller
         Session::flash('nohp', $request->nohp);
 
         $request->validate([
-            'nama'=>['required','regex:/^[A-Za-z\s]*$/','string','max:255'],
-            'email'=>['required','regex:/(gmail|googlemail).com/','email','unique:users','max:255'],
+            'nama'=>['required','regex:/^[A-Za-z\s]*$/','string','max:100'],
+            'email'=>['required','regex:/(gmail|googlemail).com/','email','unique:users','max:100'],
             'nohp'=> ['required','regex:/^(\+62|62|0)8[1-9][0-9]{6,10}$/','string','min:9','max:14','unique:users'],
             'password'=> 'required|min:6|max:32',
             'g-recaptcha-response' => 'required|captcha'
