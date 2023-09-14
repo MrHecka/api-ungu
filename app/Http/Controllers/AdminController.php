@@ -19,9 +19,13 @@ class AdminController extends Controller
             $data = User::where('nama', 'like', "%$katakunci%")
                 ->orWhere('nama', 'like', "%$katakunci%")->orWhere('email', 'like', "%$katakunci%")->paginate($jumlahbaris);
         } else {
-
             $data = User::orderBy('nama', 'desc')->paginate($jumlahbaris);
         }
+
+        if(!json_decode(json_encode($data), true)['data']) {
+            return redirect()->to('/admin')->withErrors('Data tidak ditemukan!');
+        }
+
         return view('page.admin')->with([
             'data' => $data,
             'logs_login' => $total_logins
@@ -43,14 +47,18 @@ class AdminController extends Controller
 
     public function show(string $id)
     {
-
+        $listUser = User::find($id);
+        return response()->json([
+            'status'=>200,
+            'UserDetails'=>$listUser
+        ]);
     }
 
 
 
     public function edit($id)
     {
-        //  
+     
     }
 
 

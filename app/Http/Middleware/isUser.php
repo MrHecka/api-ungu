@@ -22,6 +22,6 @@ class isUser
             Auth::user()->saveQuietly();
             return $next($request);
         }
-        return redirect('/')->withErrors('Login Dulu Woyyy😡');
+        return redirect('/')->withErrors('Silahkan Melakukan Login Terlebih Dahulu!');
     }
 }

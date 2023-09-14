@@ -11,10 +11,21 @@
         "twitter": "https://twitter.com/TheeMitz"
     },
     {
-        "image": "#",
+        "image": "img/contributor/adib.webp",
         "nama": "Muhammad Adib Firmansyah",
         "role": "Contributor",
         "desc": "Halo perkenalkan nama saya Muhammad Adib Firmansyah👋 Role saya disini sebagai Contributor atau yang membantu website ini berkembang dalam segi apapun, salam kenal semuanya😁🙌",
+        "instagram": "#",
+        "github": "#",
+        "facebook": "#",
+        "linkedin": "#",
+        "twitter": "#"
+    },
+    {
+        "image": "img/contributor/rama.webp",
+        "nama": "Fatqan Ramadiansyah",
+        "role": "Contributor",
+        "desc": "Halo perkenalkan nama saya Fatqan Ramadiansyah👋 Role saya disini sebagai Contributor dalam teknis server untuk membantu website ini tetap berjalan dan bekerja dengan baik😁🙌",
         "instagram": "#",
         "github": "#",
         "facebook": "#",

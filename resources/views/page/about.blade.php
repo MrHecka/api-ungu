@@ -12,7 +12,7 @@
         @foreach($contributors as $contrib)
             <div class="overflow-y-auto max-[1024px]:h-120 max-[1024px]:py-2 rounded-xl bg-gray-800 bg-opacity-50 px-16 py-5 shadow-lg backdrop-blur-md max-sm:px-8">
                     <div class="p-5 text-center text-white max-w-sm">
-                        <img class="w-32 h-32 rounded-full mx-auto hover:scale-150" src="{{ url($contrib['image']) }}" alt="">
+                        <a href="{{ url($contrib['image']) }}" target="_blank"><img class="w-32 h-32 rounded-full mx-auto hover:scale-150" src="{{ url($contrib['image']) }}" alt=""></a>
                         <div class="text-sm mt-5">
                             <a href="#"
                                 class="font-medium leading-none text-white hover:text-indigo-600 transition duration-500 ease-in-out">{{ $contrib['nama'] }}
