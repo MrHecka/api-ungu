@@ -15,10 +15,21 @@
         "nama": "Muhammad Adib Firmansyah",
         "role": "Contributor",
         "desc": "Halo perkenalkan nama saya Muhammad Adib Firmansyah👋 Role saya disini sebagai Contributor atau yang membantu website ini berkembang dalam segi apapun, salam kenal semuanya😁🙌",
-        "instagram": "#",
-        "github": "#",
+        "instagram": "https://www.instagram.com/adibfirmannn",
+        "github": "https://github.com/adibfirmannn",
         "facebook": "#",
         "linkedin": "#",
+        "twitter": "#"
+    },
+    {
+        "image": "img/contributor/dilla.webp",
+        "nama": "Dilla Novyanti",
+        "role": "Contributor",
+        "desc": "Halo perkenalkan nama saya Dilla Novyanti👋 Role saya disini sebagai Contributor untuk tester website API Ungu agar website ini dapat digunakan dan tidak ada kendala untuk kedepannya😁🙌",
+        "instagram": "https://www.instagram.com/dill.novv",
+        "github": "https://github.com/Dilla-Novyanti",
+        "facebook": "#",
+        "linkedin": "https://www.linkedin.com/in/dilla-novyanti-23092003",
         "twitter": "#"
     },
     {
@@ -26,8 +37,8 @@
         "nama": "Fatqan Ramadiansyah",
         "role": "Contributor",
         "desc": "Halo perkenalkan nama saya Fatqan Ramadiansyah👋 Role saya disini sebagai Contributor dalam teknis server untuk membantu website ini tetap berjalan dan bekerja dengan baik😁🙌",
-        "instagram": "#",
-        "github": "#",
+        "instagram": "https://www.instagram.com/ramaren__",
+        "github": "https://github.com/MasRama",
         "facebook": "#",
         "linkedin": "#",
         "twitter": "#"
