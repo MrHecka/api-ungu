@@ -33,7 +33,12 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/auth/register', 'register')->middleware('isGuest')->name('register');
     Route::post('/auth/registme', 'createUser')->middleware('isGuest')->name('postregister');
     Route::get('/auth/logout', 'logout')->name('logout');
+    Route::get('/lupa-password', 'lupaPass')->name('lupaPass');
+    Route::post('/reset-password', 'resetPass')->name('resetPass');
+    Route::get('/ubah-password/{token}', 'ubahPassView')->name('ubahPassView');
+    Route::post('/ubah-password', 'ubahPassword')->name('ubahPassword');
 });
+
 
 // PAGE CONTROLLER
 Route::controller(pageController::class)->group(function () {

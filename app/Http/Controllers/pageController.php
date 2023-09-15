@@ -65,7 +65,7 @@ class pageController extends Controller
             'email' => 'required|string|email|max:100|unique:users,email,' . $user->id,
             'g-recaptcha-response' => 'required|captcha',
             'apikey' => 'required|min:32|max:32|string|unique:users,apikey,' . $user->id,
-            'wlip'=> ['max:255','regex:/((25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)(,|,?$))/']
+            'wlip'=> ['nullable','max:255','regex:/((25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)\.(25[0-5]|2[0-4]\d|[01]?\d\d?)(,|,?$))/']
 
         ], [
             'nama.required' => 'Harap isi nama terlebih dahulu!',
