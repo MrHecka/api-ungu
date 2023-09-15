@@ -127,10 +127,11 @@ class AuthController extends Controller
 
     public function resetPass(Request $request)
     {
-        $request->validate(['email' => 'required|email'],
+        $request->validate(['email' => 'required|email','g-recaptcha-response' => 'required|captcha'],
         [
             'email.required'=>'Harap masukkan email yang anda pernah daftarkan terlebih dahulu!',
-            'email.email'=>'Format Email Salah! Mohon untuk memasukkan email yang sesuai :)'
+            'email.email'=>'Format Email Salah! Mohon untuk memasukkan email yang sesuai :)',
+            'g-recaptcha-response.required'=>'Harap selesaikan captcha terlebih dahulu!'
         ]);
  
         $status = Password::sendResetLink(
@@ -153,6 +154,7 @@ class AuthController extends Controller
             'token' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:6|max:32|confirmed',
+            'g-recaptcha-response' => 'required|captcha'
         ]);
 
         $status = Password::reset(
