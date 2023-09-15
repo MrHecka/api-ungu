@@ -17,8 +17,8 @@
                     <span>[{{ $apiDocs['methodReq'] }}] {{ $apiDocs['title']  }}</span>
                 </button>
             </h2>
-            <div id="accordion-flush-body-{{ $loop->iteration }}" class="hidden" aria-labelledby="accordion-flush-heading-{{ $loop->iteration }}">
-                <div class="p-5 border border-b-1 bg-gray-900 border-white-200 dark:border-white-700 dark:bg-gray-900">
+            <div id="accordion-flush-body-{{ $loop->iteration }}" class="hidden overflow-y-auto pt-16 flex flex-col h-screen w-full inline items-center text-md" aria-labelledby="accordion-flush-heading-{{ $loop->iteration }}">
+                <div class="overflow-y-auto pt-16 flex flex-col h-screen w-full inline items-center text-md p-5 border border-b-1 bg-gray-900 border-white-200 dark:border-white-700 dark:bg-gray-900">
                     <p>Response:</p>
                     <pre class="mb-2 text-white-500 dark:text-white-400 flex-grow">{{ json_encode($apiDocs['docs'], JSON_PRETTY_PRINT) }}</pre>
                 </div>
