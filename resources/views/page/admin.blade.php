@@ -7,51 +7,49 @@
 @section('isikonten')
 
 <div class="overflow-y-auto overflow-x-auto flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">
-<div class="overflow-y-auto overflow-x-auto max-[1024px]:h-120 max-[1024px]:py-2 my-3 p-3 bg-body rounded shadow-sm">
-<div class="overflow-y-auto overflow-x-auto rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
-<div class="text-white">
-    
-            <!-- FORM PENCARIAN -->
-            
-            <div class="mb-3">
-                <form action="{{ url('admin') }}" method="get" class="relative flex w-full">
-                    <div class="relative flex w-full">
-                        <input
-                            type="search"
-                            name="katakunci"
-                            value="{{ Request::get('katakunci') }}"
-                            aria-label="Search"
-                            class="relative block w-full min-w-0 flex-auto px-3 py-1.5 text-base font-normal text-white bg-transparent border border-solid border-neutral-300 rounded bg-clip-padding transition duration-200 ease-in-out outline-none focus:z-[3] focus:border-primary focus:text-white focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] dark:border-neutral-600 dark:text-neutral-200 dark:placeholder-text-neutral-200 dark:focus:border-primary"
+    <div class="overflow-y-auto overflow-x-auto max-[1024px]:h-120 max-[1024px]:py-2 my-3 p-3 bg-body rounded shadow-sm">
+        <div class="overflow-y-auto overflow-x-auto rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+            <div class="text-white">   
 
-                            placeholder="Search"
-                        />
-                        <button
-                            type="submit"
-                            class="btn btn-secondary flex items-center px-3 py-1.5 rounded ml-2"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                                class="h-5 w-5"
+                <!-- FORM PENCARIAN -->
+                <div class="mb-3">
+                    <form action="{{ url('admin') }}" method="get" class="relative flex w-full">
+                        <div class="relative flex w-full">
+                            <input
+                                type="search"
+                                name="katakunci"
+                                value="{{ Request::get('katakunci') }}"
+                                aria-label="Search"
+                                class="relative block w-full min-w-0 flex-auto px-3 py-1.5 text-base font-normal text-white bg-transparent border border-solid border-neutral-300 rounded bg-clip-padding transition duration-200 ease-in-out outline-none focus:z-[3] focus:border-primary focus:text-white focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] dark:border-neutral-600 dark:text-neutral-200 dark:placeholder-text-neutral-200 dark:focus:border-primary"
+
+                                placeholder="Search"
+                            />
+                            <button
+                                type="submit"
+                                class="btn btn-secondary flex items-center px-3 py-1.5 rounded ml-2"
                             >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
-                                    clip-rule="evenodd"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                </form>
-            </div>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    class="h-5 w-5"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                                        clip-rule="evenodd"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
                         
-          
                 <table class="min-w-full text-left text-sm font-light">
                     <thead class="border-b font-medium dark:border-neutral-500">
                         <tr>
                             <th scope="col" class="px-6 py-4">No</th>
-                            <th scope="col" class="px-6 py-4">Nama Lenkap</th>
+                            <th scope="col" class="px-6 py-4">Nama Lengkap</th>
                             <th scope="col" class="px-6 py-4">No. HP</th>
                             <th scope="col" class="px-6 py-4">Email</th>
                             <th scope="col" class="px-6 py-4">Role</th>
@@ -113,55 +111,56 @@
                     <div class="container text-center justify-center">
                         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                             <h3 class="text-2xl leading-6 font-medium text-white text-center pb-8" id="modal-title">
-                                Update User
+                                UPDATE USER
                             </h3>
                             <div class="mt-2 justify-center items-center">
-                                <div class="w-full max-w-xs items-center justify-center">
+                                <div class="w-full items-center justify-center m-0">
                                     <form method="POST" action="{{ url('admin/'.$item->id) }}">
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" id="userId" name="userId" value="">
                                         
                                         <div class="mb-4">
-                                            <label for="nama" class="block pl-32 text-center items-center justify-center text-white text-sm font-bold mb-2">Nama User :</label>
-                                            <input type="text" value="" class="rounded-3xl border-none text-white bg-purple-400 bg-opacity-50 items-center px-32 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50" id="nama" name="nama" placeholder="Nama">
+                                            <label for="nama" class="block text-center items-center justify-center text-white text-sm font-bold mb-2 w-full">Nama User :</label>
+                                            <input type="text" value="" class="rounded-3xl border-none text-white bg-purple-400 bg-opacity-50 items-center px-4 lg:px-32 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50 w-full" id="nama" name="nama" placeholder="Nama">
                                         </div>
                                         
                                         <div class="mb-4">
-                                            <label for="nohp" class="block pl-32 text-center items-center justify-center text-white text-sm font-bold mb-2">No HP :</label>
-                                            <input class="rounded-3xl border-none text-white bg-purple-400 bg-opacity-50 items-center px-32 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50" id="nohp" name="nohp" value="" type="text" placeholder="No HP">
+                                            <label for="nohp" class="block text-center items-center justify-center text-white text-sm font-bold mb-2 w-full">No HP :</label>
+                                            <input class="rounded-3xl border-none text-white bg-purple-400 bg-opacity-50 items-center px-4 lg:px-32 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50 w-full" id="nohp" name="nohp" value="" type="text" placeholder="No HP">
                                         </div>
                                         
                                         <div class="mb-4">
-                                            <label for="email" class="block pl-32 text-center items-center justify-center text-white text-sm font-bold mb-2">Email :</label>
-                                            <input class="rounded-3xl border-none text-white bg-purple-400 bg-opacity-50 items-center px-32 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50" id="email" name="email" value="" type="email" placeholder="Email">
+                                            <label for="email" class="block text-center items-center justify-center text-white text-sm font-bold mb-2 w-full">Email :</label>
+                                            <input class="rounded-3xl border-none text-white bg-purple-400 bg-opacity-50 items-center px-4 lg:px-32 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50 w-full" id="email" name="email" value="" type="email" placeholder="Email">
                                         </div>
                                         
                                         <div class="mb-4 place-self-center place-self-center place-items-center content-center place-items-center text-center font-bold">
-                                            <label for="roles" class="block pl-32 text-center items-center justify-center text-white text-sm font-bold mb-2">Verifikasi Email :</label>
-                                            <select class="place-self-center ml-32 text-center items-center rounded-3xl place-items-center border-none justify-center text-white bg-purple-400 bg-opacity-50 items-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50" id="verifyEmail" name="verifyEmail">
+                                            <label for="roles" class="block text-center items-center justify-center text-white text-sm font-bold mb-2 w-full">Verifikasi Email :</label>
+                                            <select class="place-self-center text-center items-center rounded-3xl place-items-center border-none justify-center text-white bg-purple-400 bg-opacity-50 px-12 text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50 w-full" id="verifyEmail" name="verifyEmail">
                                                 <option value="">Belum Verifikasi</option>
                                                 <option value={{ date("Y-m-d H:i:s"); }}>Sudah Verifikasi</option>
                                               </select>
                                         </div>
 
                                         <div class="mb-4 place-self-center place-self-center place-items-center content-center place-items-center text-center font-bold">
-                                            <label for="roles" class="block pl-32 text-center items-center justify-center text-white text-sm font-bold mb-2">Role User :</label>
-                                            <select class="place-self-center ml-32 text-center items-center rounded-3xl place-items-center border-none justify-center text-white bg-purple-400 bg-opacity-50 items-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50" id="roles" name="roles">
+                                            <label for="roles" class="block text-center items-center justify-center text-white text-sm font-bold mb-2">Role User :</label>
+                                            <select class="place-self-center text-center items-center rounded-3xl place-items-center border-none justify-center text-white bg-purple-400 bg-opacity-50 px-12 text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md placeholder-opacity-50 w-full" id="roles" name="roles">
                                                 <option value=0>User</option>
                                                 <option value=1>Admin</option>
                                               </select>
                                         </div>
                                         
-                                        <button type="submit" id="updateButton" class="flex inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
-                                            Update
-                                        </button>
-                                        
-                                        <button type="button" class="closeModal mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                                             Cancel
-                                        </button>
-                                    </form>
+                                        <div class="mb-4 place-self-center content-center place-items-center text-center font-bold md:text-center md:text-right">
+                                            <button type="button" class="closeModal mt-3 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                                Cancel
+                                            </button>
 
+                                            <button type="submit" id="updateButton" class="flex inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                                Update
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
