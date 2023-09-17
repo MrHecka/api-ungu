@@ -4,6 +4,8 @@
 
 @extends('layout.app')
 
+@section('title')DOCS |@endsection
+
 @section('isikonten')
 
 <div class="overflow-y-auto pt-16 flex flex-col h-screen w-full inline items-center text-md text-white text-left font-sans justify-center font-bold bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">

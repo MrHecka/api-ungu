@@ -4,6 +4,8 @@
 
 @extends('layout.app')
 
+@section('title')ADMIN |@endsection
+
 @section('isikonten')
 
 <div class="overflow-y-auto overflow-x-auto flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">

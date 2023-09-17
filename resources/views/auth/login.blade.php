@@ -2,6 +2,8 @@
 
 @extends('layout.app')
 
+@section('title')LOGIN |@endsection
+
 @section('isikonten')
 
 <div class="overflow-y-auto relative flex md:h-screen sm:w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">

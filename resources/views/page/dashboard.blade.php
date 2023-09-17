@@ -4,6 +4,8 @@
 
 @extends('layout.app')
 
+@section('title')DASHBOARD |@endsection
+
 @section('isikonten')
 
 <div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url({{url('img/bgAuth.webp')}})">
