@@ -122,6 +122,7 @@
     $( '.g-recaptcha' ).attr( 'data-theme', 'dark' );
  
     </script>
+    @yield('script')
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-KV1S151W09"></script>
   <script>
@@ -130,5 +131,6 @@
       gtag('js', new Date());
 
       gtag('config', 'G-KV1S151W09');
-    </script>
+  </script>
+
 </html>
